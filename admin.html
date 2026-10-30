@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Operations Dashboard - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="site.js" defer></script>
+</head>
+
+<body>
+  <!-- "home" gives the top bar and button styles; "admin" adds this page's own styles -->
+  <div class="home admin">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <a href="dashboard.html" class="logo-link"><img src="Images/screen.png" alt="CineNova" class="logo" /></a>
+      <button type="button" class="menu-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <span class="brand">CINE<span class="red">NOVA</span><small>Premiere Luxe</small></span>
+      <nav>
+        <a href="catalog.html">Movies</a>
+        <a href="details.html">Showtimes</a>
+        <a href="seats.html">Theaters</a>
+        <a href="dashboard.html">Experiences</a>
+        <a href="#" class="on">Admin Portal</a>
+        <a href="#">Analytics</a>
+      </nav>
+      <select name="theater" id="cinema">
+        <option>Downtown IMAX 3D</option>
+        <option>West End Cinema</option>
+        <option>Uptown CineDome</option>
+      </select>
+      <div class="field">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search titles, cast, directors..." />
+      </div>
+      <button class="icon-btn bell"><i class="fa-regular fa-bell"></i><span class="count">1</span></button>
+      <a class="avatar" href="login.html" title="Sign out"><img src="" alt="Profile" /></a>
+    </header>
+
+    <main>
+      <!-- PAGE HEADER -->
+      <section class="dash page-top">
+        <div>
+          <p class="tags-line"><span class="tag gold">HQ Operations Command</span> <span class="tag"><i class="fa-solid fa-circle dot gold"></i> Terminal #402-A</span></p>
+          <h1>Cine<span class="red">Nova</span> Operations Command — Downtown Flagship</h1>
+          <p><i class="fa-solid fa-tower-broadcast red"></i> Real-time telemetry stream synchronized with Barco Laser TMS & Dolby CP950 processors</p>
+        </div>
+        <div class="top-tools">
+          <span class="chip"><i class="fa-regular fa-calendar gold"></i> Today: Friday, Oct 25, 2024 <i class="fa-solid fa-chevron-down"></i></span>
+          <span class="chip"><i class="fa-solid fa-circle dot gold"></i> 12 / 12 Auditoriums Active <b class="tag gold">94.2% Occupancy</b></span>
+          <div class="top-buttons">
+            <button class="btn"><i class="fa-solid fa-plus"></i> Open Auditorium</button>
+            <button class="btn-red"><i class="fa-solid fa-plus"></i> Schedule Showtime</button>
+            <button class="icon-btn"><i class="fa-solid fa-download"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- KPI CARDS -->
+      <section class="kpis">
+        <div class="kpi">
+          <div class="kpi-top"><p>Today's Box Office Gross</p><span class="kpi-icon"><i class="fa-solid fa-money-bill-wave"></i></span></div>
+          <strong>$48,920.00</strong>
+          <div class="kpi-foot">
+            <span class="gold"><i class="fa-solid fa-arrow-trend-up"></i> +18.4% <small>vs last Fri</small></span>
+            <svg viewBox="0 0 80 30" width="80" height="30"><polyline points="0,26 15,20 28,22 42,12 55,14 68,5 80,8" fill="none" stroke="#ffd43b" stroke-width="2"/></svg>
+          </div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-top"><p>Total Tickets Sold</p><span class="kpi-icon"><i class="fa-solid fa-ticket"></i></span></div>
+          <strong>2,418 <small>/ 2,680</small></strong>
+          <p class="split"><span>Capacity Fill</span><b class="gold">90.2%</b></p>
+          <div class="meter two"><span class="r" style="width:68%"></span><span class="g" style="width:32%"></span></div>
+          <p class="split"><span><i class="fa-solid fa-circle dot red"></i> IMAX 68%</span><span><i class="fa-solid fa-circle dot gold"></i> Dolby 32%</span></p>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-top"><p>Concessions Revenue</p><span class="kpi-icon"><i class="fa-solid fa-bag-shopping"></i></span></div>
+          <strong>$19,340.50</strong>
+          <div class="kpi-box"><p>Avg / Patron <b>$8.00</b></p><p>Top SKU <b class="gold">Truffle Nachos</b></p></div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-top"><p>VIP Lounge Occupancy</p><span class="kpi-icon"><i class="fa-solid fa-martini-glass"></i></span></div>
+          <strong>142 <small>/ 160</small></strong>
+          <p class="split"><span>Private Club Access</span><b>88.7% Capacity</b></p>
+          <div class="meter gold"><span style="width:88.7%"></span></div>
+          <p class="split"><span class="gold">18 passes remaining</span><span>Table Wait: &lt; 3m</span></p>
+        </div>
+      </section>
+
+      <!-- AUDITORIUM FLEET -->
+      <section class="dash">
+        <div class="dash-head">
+          <div>
+            <h2>Auditorium Fleet Telemetry <span class="tag gold">Realtime TMS</span></h2>
+            <p>Live hardware sensors, acoustic calibration, and seating occupancy across current screening blocks.</p>
+          </div>
+          <div class="legend-row">
+            <span><i class="fa-solid fa-square gold"></i> Seating</span>
+            <span><i class="fa-solid fa-square red"></i> Sold Out</span>
+            <span><i class="fa-solid fa-square grey"></i> Standby</span>
+            <button class="btn">Auditorium View All (12)</button>
+          </div>
+        </div>
+        <div class="fleet" id="fleet"></div>
+      </section>
+
+      <!-- QUEUE + ORDERS -->
+      <div class="two-col">
+        <section class="dash">
+          <div class="dash-head">
+            <div>
+              <h2>Upcoming Exhibition Queue</h2>
+              <p>Dynamic pricing controls, capacity triggers, and VIP block reserve locks.</p>
+            </div>
+            <div class="field filter">
+              <i class="fa-solid fa-filter"></i>
+              <input type="text" id="filter" placeholder="Filter title or hall..." />
+            </div>
+          </div>
+
+          <table class="queue">
+            <thead>
+              <tr><th>Movie Title</th><th>Hall / Format</th><th>Showtime</th><th>Sales / Cap</th><th>Tier</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="queue"></tbody>
+          </table>
+
+          <div class="seat-map-card">
+            <span class="kpi-icon"><i class="fa-solid fa-chair gold"></i></span>
+            <div class="grow">
+              <strong>Hall 01 Interactive Seating Map</strong>
+              <p>7 VIP Recliners held for Director's Guild delegation • Release timeout in 14 mins</p>
+            </div>
+            <a href="seats.html" class="btn launch">Launch Seat Engine</a>
+          </div>
+        </section>
+
+        <div class="right-stack">
+          <section class="dash">
+            <div class="dash-head">
+              <h2>In-Seat Butler Orders <span class="tag gold">Live Dispatch</span></h2>
+              <p>6 Pending</p>
+            </div>
+
+            <div class="order-card">
+              <div class="order-top"><span class="tag">Hall 1 • Row F (Seats 8-9)</span><span class="state gold"><i class="fa-solid fa-circle dot"></i> In Kitchen</span></div>
+              <p class="mono">Placed 3 mins ago • Priority VIP</p>
+              <p class="line"><span>1x Truffle Gouda Artisanal Nachos</span><b class="gold">$16.50</b></p>
+              <p class="line"><span>2x Blood Orange Italian Soda (Craft)</span><b class="gold">$15.00</b></p>
+              <p class="line"><span>1x Large Warm Clarified Butter Popcorn</span><b class="gold">$9.50</b></p>
+              <p class="line"><span>Total: <b class="white">$41.00</b></span><button class="gold-btn" id="dispatch">Dispatch to Seat</button></p>
+            </div>
+
+            <div class="order-card">
+              <div class="order-top"><span class="tag">VIP Lounge • Table 04</span><span class="state purple"><i class="fa-solid fa-circle dot"></i> Out for Delivery</span></div>
+              <p class="mono">Placed 8 mins ago</p>
+              <p class="line"><span>2x Reserve Pinot Noir (Glass)</span><b class="gold">$34.00</b></p>
+              <p class="line"><span>1x Charcuterie & Imported Fromage Platter</span><b class="gold">$28.00</b></p>
+              <p class="line"><span>Server: <b class="white">Marcus V.</b></span><b class="gold"><i class="fa-regular fa-circle-check"></i> Delivered</b></p>
+            </div>
+          </section>
+
+          <section class="dash">
+            <div class="dash-head"><h2 class="small-h">Facility & TMS Alerts</h2><span class="tag">All Clear</span></div>
+            <p class="alert"><span><i class="fa-regular fa-circle-check gold"></i> Auditorium 1 Laser Projector Lamp Check</span><b class="mono gold">Optimal (44.2°C)</b></p>
+            <p class="alert"><span><i class="fa-solid fa-bell-concierge gold"></i> VIP Lounge Concierge Call: Table 4</span><b class="mono gold">Attended (0.8m)</b></p>
+            <p class="alert"><span><i class="fa-regular fa-calendar"></i> Concessions Hub: Truffle Gouda Re-stock</span><b class="mono">18 batches avail</b></p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="admin-footer">
+      <div>
+        <h4>CINE<span class="red">NOVA</span> <span class="tag">Studio Tier</span></h4>
+        <p class="about">Architecting the pinnacle of theatrical immersion. Grounded in state-of-the-art laser projection, Dolby Atmos acoustics, and private VIP suite hospitality.</p>
+        <p><span class="tag">IMAX Laser</span> <span class="tag">Dolby Atmos</span> <span class="tag">D-Box Motion</span></p>
+      </div>
+      <div>
+        <h4>THE EXPERIENCE</h4>
+        <a href="#">Auditorium Hierarchy</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+        <a href="bar-kitchen.html">Bar & Kitchen</a>
+        <a href="#">VIP Cinema Club</a>
+        <a href="#">Private Screenings</a>
+        <a href="#">Gift Cards & Vouchers</a>
+      </div>
+      <div>
+        <h4>MANAGEMENT</h4>
+        <a href="#">Box Office Operations</a>
+        <a href="#">Auditorium Telemetry</a>
+        <a href="#">Seating Architecture</a>
+        <a href="#">Yield Management</a>
+        <a href="#">Compliance & Safety</a>
+      </div>
+      <div>
+        <h4>PREMIERE DISPATCH</h4>
+        <p>Receive red carpet invitations, festival pre-sales, and private lounge allocations.</p>
+        <div class="join-row">
+          <input type="email" placeholder="director@cinenova.luxe" />
+          <button class="btn-red">Join</button>
+        </div>
+        <p class="tiny">Curated weekly. Zero solicitations.</p>
+      </div>
+    </footer>
+
+    <div class="copyright">
+      <p>© 2025 CineNova Luxury Entertainment Inc. All global rights reserved.</p>
+      <p>Privacy Matrix &nbsp; Terms of Exhibition &nbsp; Auditorium Protocols &nbsp; Security Auditing</p>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Auditorium data (change these to update the cards) ----------
+    // top = card border color, tone = bar color, fc/sc = tag / status colors
+    var halls = [
+      { name: "Hall 01", fmt: "IMAX 3D Laser", fc: "red", status: "Seating Commenced", sc: "gold", movie: "Cosmic Horizon: Odyssey", time: "6:45 PM", run: 168, screen: "1-A", occ: "333 / 340 Seats", pct: "98% (Almost Sold Out)", w: 98, tone: "gold", top: "gold", i1: "fa-video", t1: "Barco 4K: 44.2°C", i2: "fa-microchip", t2: "Atmos 64ch: Sync" },
+      { name: "Hall 02", fmt: "Dolby Atmos Luxe", fc: "purple", status: "Pre-show Ads", sc: "grey", movie: "Neon Samurai: Blood & Steel", time: "7:00 PM", run: 135, screen: "2-B", occ: "185 / 220 Seats", pct: "84% Full", w: 84, tone: "gold", top: "gold", i1: "fa-video", t1: "Christie CP4420: 41.8°C", i2: "fa-microchip", t2: "Atmos CP950: OK" },
+      { name: "Hall 03", fmt: "Barco 4K Laser", fc: "grey", status: "Standby / Cleaning", sc: "grey", movie: "The Phantom of Venice", time: "7:30 PM", run: 114, screen: "3-A", occ: "117 / 180 Seats", pct: "65% Reserved", w: 65, tone: "grey", top: "grey", i1: "fa-broom", t1: "Cleaning Crew Assigned", i2: "fa-clock", t2: "12m left" },
+      { name: "Hall 04", fmt: "4DX Immersive", fc: "red", status: "100% Sold Out", sc: "red", movie: "Midnight Velocity", time: "8:15 PM", run: 142, screen: "4-D", occ: "140 / 140 Seats", pct: "Max Capacity", w: 100, tone: "red", top: "red", i1: "fa-sliders", t1: "Hydraulics: Calibrated", i2: "fa-spray-can-sparkles", t2: "Scent Pods: 92%" },
+      { name: "Hall 05", fmt: "VIP Private Suite", fc: "purple", status: "Service Active", sc: "gold", movie: "Chronicles of Solitude", time: "8:00 PM", run: 156, screen: "5-L", occ: "46 / 50 Recliners", pct: "92% Reserved", w: 92, tone: "gold", top: "purple", i1: "fa-bell-concierge", t1: "In-Seat Butler: Ready", i2: "fa-temperature-half", t2: "Temp: 21.5°C" },
+      { name: "Hall 06", fmt: "ScreenX 270°", fc: "grey", status: "Final Soundcheck", sc: "gold", movie: "Apex: Dawn of Stars", time: "8:30 PM", run: 128, screen: "6-SX", occ: "178 / 210 Seats", pct: "84.7% Full", w: 84.7, tone: "gold", top: "grey", i1: "fa-expand", t1: "Tri-Screen Alignment: 99.8%", i2: "fa-temperature-half", t2: "Core: 39°C" }
+    ];
+
+    document.getElementById("fleet").innerHTML = halls.map(function (h) {
+      return '<article class="hcard top-' + h.top + '">' +
+        '<div class="hrow"><h3>' + h.name + ' <span class="tag f-' + h.fc + '">' + h.fmt + '</span></h3>' +
+        '<span class="state ' + h.sc + '"><i class="fa-solid fa-circle dot"></i> ' + h.status + '</span></div>' +
+        '<h4>' + h.movie + '</h4>' +
+        '<p class="run"><b class="gold">' + h.time + ' Showtime</b> • Run: ' + h.run + ' min • Screen ' + h.screen + '</p>' +
+        '<p class="occ"><span>Occupancy: ' + h.occ + '</span><b class="' + h.tone + '">' + h.pct + '</b></p>' +
+        '<div class="meter ' + h.tone + '"><span style="width:' + h.w + '%"></span></div>' +
+        '<div class="tele"><span><i class="fa-solid ' + h.i1 + '"></i> ' + h.t1 + '</span><span><i class="fa-solid ' + h.i2 + '"></i> ' + h.t2 + '</span><a href="#">Inspect →</a></div>' +
+        '</article>';
+    }).join("");
+
+    // ---------- Exhibition queue data ----------
+    var shows = [
+      { title: "Cosmic Horizon: Odyssey", meta: "Warner Bros • 2h 48m", hall: "Hall 1 (IMAX 3D)", fc: "gold", time: "6:45 PM", cap: "333/340", pct: 98, tone: "gold", price: "$28.50", tier: "Prime", locked: true },
+      { title: "Neon Samurai: Blood & Steel", meta: "Toho / A24 • 2h 15m", hall: "Hall 2 (Atmos)", fc: "purple", time: "7:00 PM", cap: "185/220", pct: 84, tone: "gold", price: "$24.00", tier: "Std", locked: false },
+      { title: "The Phantom of Venice", meta: "Universal • 1h 54m", hall: "Hall 3 (Barco 4K)", fc: "grey", time: "7:30 PM", cap: "117/180", pct: 65, tone: "grey", price: "$21.00", tier: "Std", locked: false },
+      { title: "Midnight Velocity", meta: "Paramount • 2h 22m", hall: "Hall 4 (4DX)", fc: "red", time: "8:15 PM", cap: "140/140", pct: 100, tone: "red", price: "$32.00", tier: "VIP", locked: false }
+    ];
+
+    document.getElementById("queue").innerHTML = shows.map(function (s) {
+      return '<tr><td><strong>' + s.title + '</strong><small>' + s.meta + '</small></td>' +
+        '<td><span class="tag f-' + s.fc + '">' + s.hall + '</span></td>' +
+        '<td class="gold"><b>' + s.time + '</b></td>' +
+        '<td>' + s.cap + ' <b class="' + s.tone + '">' + s.pct + '%</b><div class="meter ' + s.tone + '"><span style="width:' + s.pct + '%"></span></div></td>' +
+        '<td><b class="price">' + s.price + '</b> <small>' + s.tier + '</small></td>' +
+        '<td class="acts"><button class="sq"><i class="fa-solid fa-gear"></i></button><button class="sq"><i class="fa-regular fa-id-card"></i></button>' +
+        '<button class="sq lock' + (s.locked ? ' on' : '') + '"><i class="fa-solid fa-lock"></i></button></td></tr>';
+    }).join("");
+
+    // ---------- Interactions ----------
+    // Lock button: click to lock / unlock a showing
+    document.getElementById("queue").addEventListener("click", function (e) {
+      var btn = e.target.closest(".lock");
+      if (btn) btn.classList.toggle("on");
+    });
+
+    // Filter box: hides rows that don't match what you type
+    document.getElementById("filter").addEventListener("input", function () {
+      var text = this.value.toLowerCase();
+      document.querySelectorAll("#queue tr").forEach(function (row) {
+        row.style.display = row.textContent.toLowerCase().indexOf(text) > -1 ? "" : "none";
+      });
+    });
+
+    // Dispatch to Seat: marks the order as sent
+    document.getElementById("dispatch").addEventListener("click", function () {
+      this.innerHTML = '<i class="fa-solid fa-check"></i> Dispatched';
+      this.disabled = true;
+    });
+  </script>
+</body>
+</html>

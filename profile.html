@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="site.js" defer></script>
+</head>
+
+<body>
+  <!-- "home" gives the top bar, buttons and footer; "profile" adds this page's own styles -->
+  <div class="home profile">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <a href="dashboard.html" class="logo-link"><img src="Images/screen.png" alt="CineNova" class="logo" /></a>
+      <button type="button" class="menu-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <select name="theater" id="cinema">
+        <option>Downtown IMAX 3D</option>
+        <option>West End Cinema</option>
+        <option>Uptown CineDome</option>
+      </select>
+      <button class="btn-red" data-href="catalog.html">Now Showing</button>
+      <nav>
+        <a href="catalog.html">Upcoming</a>
+        <a href="catalog.html">Theaters</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+        <a href="profile.html" class="on">Profile</a>
+      </nav>
+      <div class="field">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search" placeholder="Search movies..." />
+      </div>
+      <button class="icon-btn ticket-btn" data-href="confirmation.html">
+        <i class="fa-solid fa-ticket gold"></i><span class="count">2</span>
+      </button>
+      <a class="avatar" href="profile.html" title="My profile"><img src="" alt="Profile" /></a>
+    </header>
+
+    <main>
+      <!-- PROFILE HEADER -->
+      <section class="pf-card pf-head">
+        <div class="pf-top">
+          <div class="pf-photo"><img src="" alt="Profile photo" /><span class="pf-star"><i class="fa-solid fa-star"></i></span></div>
+          <div class="grow">
+            <h1><span id="pf-name">Elena Vance</span>
+              <span class="tag gold">VIP Obsidian Tier</span> <span class="tag f-red">Top 2% Connoisseur</span></h1>
+            <p class="pf-sub"><span id="pf-handle">@elenavance</span> • <i class="fa-regular fa-circle-check gold"></i> Member since Oct 2022 • <i class="fa-solid fa-location-dot"></i> <span id="pf-cinema">Downtown IMAX 3D Flagship</span></p>
+          </div>
+          <div class="pf-actions">
+            <button type="button" class="btn" id="edit-btn"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+            <button type="button" class="btn" id="share-btn"><i class="fa-solid fa-qrcode"></i> Share Card</button>
+            <button type="button" class="pf-gold-btn" data-scroll="perks"><i class="fa-solid fa-award"></i> Obsidian Perks</button>
+          </div>
+        </div>
+
+        <div class="pf-stats">
+          <div><p>CineNova Points</p><strong>4,850 <small>PTS</small></strong><p>150 pts to Free IMAX 3D Ticket</p></div>
+          <div><p>Films Watched</p><strong>28 <small>Screenings</small></strong><p>+6 ahead of 2024 pace</p></div>
+          <div><p>In-Seat Chef Dinners</p><strong>12 <small>Gourmet</small></strong><p>Favorite: Truffle Flight</p></div>
+          <div><p>Loyalty Rank</p><strong>Top 2% <small>Nationwide</small></strong><p>Obsidian VIP Lifetime Candidate</p></div>
+        </div>
+      </section>
+
+      <div class="pf-cols">
+
+        <!-- LEFT COLUMN -->
+        <div class="pf-col">
+
+          <section class="pf-card">
+            <div class="pf-title"><h2><i class="fa-regular fa-id-card gold"></i> Obsidian Digital Pass</h2><span class="tag gold">Active Pass</span></div>
+            <div class="pf-pass">
+              <div class="pf-pass-top"><strong>CINE<span class="red">NOVA</span> <span class="pf-badge">Obsidian</span></strong><span class="gold"><i class="fa-solid fa-wifi"></i> TAP TO SCAN</span></div>
+              <div class="pf-pass-mid">
+                <i class="fa-solid fa-microchip pf-chip"></i>
+                <div class="grow"><p class="pf-num">CN-9942-8810</p><p id="pass-name">ELENA VANCE • VIP DIRECT ACCESS</p></div>
+                <div class="pf-qr"><img id="pf-qr-img" alt="Pass QR code" width="64" height="64" /><i class="fa-solid fa-qrcode hidden" id="pf-qr-icon"></i></div>
+              </div>
+              <div class="pf-pass-foot"><span class="gold"><i class="fa-solid fa-bolt"></i> Priority Line Express Included</span><a href="#" id="concierge"><i class="fa-solid fa-headset"></i> Call VIP Concierge Hotkey</a></div>
+            </div>
+
+            <div class="pf-tier">
+              <p class="pf-row"><strong>Diamond Lifetime Tier Status <span class="tag gold">97% Completed</span></strong><strong>4,850 / 5,000 pts</strong></p>
+              <div class="pf-bar"><span style="width:97%"></span></div>
+              <p class="pf-row"><span>Earn 150 more pts this cycle</span><a href="#perks">Unlocks Infinite Private Suite Upgrades</a></p>
+            </div>
+          </section>
+
+          <section class="pf-card">
+            <div class="pf-title"><h2><i class="fa-solid fa-ticket red"></i> Ticket Vault &amp; Screenings</h2><a href="confirmation.html">View All Past Tickets <i class="fa-solid fa-arrow-right"></i></a></div>
+
+            <div class="pf-next">
+              <div class="pf-poster"><img src="Images/Cosmic Horizon Odyssey (2024).png" alt="Film poster" /><span>IMAX 3D</span></div>
+              <div class="grow">
+                <span class="tag f-red">Next Screening</span>
+                <h3 id="nx-title">Cosmic Horizon: Odyssey (IMAX 3D Laser)</h3>
+                <p id="nx-when">Friday, Oct 25 • 8:15 PM</p>
+                <p class="gold" id="nx-seats">Auditorium 4 • VIP Recliner Seats F12 &amp; F13</p>
+              </div>
+              <div class="pf-next-btns">
+                <button type="button" class="btn-red" data-href="confirmation.html"><i class="fa-solid fa-wallet"></i> Apple Wallet Ticket</button>
+                <button type="button" class="btn" data-href="bar-kitchen.html"><i class="fa-solid fa-utensils gold"></i> Pre-Order Bar &amp; Kitchen</button>
+              </div>
+            </div>
+            <p class="pf-row pf-small"><span><i class="fa-regular fa-bell gold"></i> Doors open at 7:45 PM • Welcome cocktail ready upon check-in</span><a href="seats.html">Modify Booking</a></p>
+
+            <h3 class="pf-sub-h">Recently Watched &amp; <span id="pf-first">Elena</span>'s Ratings</h3>
+            <div class="pf-watched">
+              <div class="pf-watch"><span class="pf-ico"><i class="fa-solid fa-clapperboard"></i></span><div class="grow"><strong>Interstellar: 10th Anniv</strong><p>70mm IMAX • Sep 28</p><p class="gold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> 5.0</p></div><button type="button" class="icon-btn" data-href="details.html" aria-label="Watch again"><i class="fa-solid fa-rotate-right"></i></button></div>
+              <div class="pf-watch"><span class="pf-ico"><i class="fa-solid fa-masks-theater"></i></span><div class="grow"><strong>Neon Shadow: Rebuilt</strong><p>Dolby Cinema • Sep 14</p><p class="gold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i> 4.5</p></div><button type="button" class="icon-btn" data-href="details.html" aria-label="Watch again"><i class="fa-solid fa-rotate-right"></i></button></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="pf-col">
+
+          <section class="pf-card" id="perks">
+            <div class="pf-title"><h2><i class="fa-solid fa-gift gold"></i> <span id="perk-name">Elena</span>'s Active Perks</h2><span class="tag gold" id="perk-count">3 Vouchers</span></div>
+
+            <div class="pf-perk"><span class="pf-ico"><i class="fa-solid fa-martini-glass gold"></i></span><div class="grow"><strong>Complimentary Craft Cocktail</strong><p>Valid at CineNova Bar &amp; Kitchen Lounge</p><p class="red"><i class="fa-regular fa-hourglass-half"></i> Expires in 14 days</p></div><button type="button" class="btn pf-apply" data-perk="cocktail">Apply</button></div>
+            <div class="pf-perk"><span class="pf-ico"><i class="fa-solid fa-bowl-food gold"></i></span><div class="grow"><strong>2x Free Large Gourmet Popcorn</strong><p>Rosemary Butter or Caramel Truffle refill</p><p>Valid all month</p></div><button type="button" class="btn pf-apply" data-perk="popcorn">Apply</button></div>
+            <div class="pf-perk"><span class="pf-ico"><i class="fa-solid fa-film red"></i></span><div class="grow"><strong>50% Off 70mm Screenings</strong><p>Exclusive Archival &amp; Premiere Series pass</p><p>Obsidian Tier exclusive</p></div><button type="button" class="btn pf-apply" data-perk="screening">Apply</button></div>
+
+            <button type="button" class="pf-redeem" id="redeem"><i class="fa-solid fa-store"></i> Redeem 4,850 Pts in Rewards Store</button>
+          </section>
+
+          <section class="pf-card">
+            <div class="pf-title"><h2><i class="fa-solid fa-gear gold"></i> Account &amp; Security</h2></div>
+
+            <div class="pf-box">
+              <p class="pf-row"><strong class="pf-h">Saved Payment Methods</strong><a href="#" id="add-card">+ Add Card</a></p>
+              <div class="pf-pay"><i class="fa-regular fa-credit-card gold"></i><div class="grow"><strong class="pf-mono">CineNova Black VIP (•••• 4082)</strong><p>Expires 09/27</p></div><span class="tag">Default</span></div>
+              <div class="pf-pay"><i class="fa-brands fa-apple"></i><div class="grow"><strong>Apple Pay</strong><p>Connected</p></div><i class="fa-regular fa-circle-check gold"></i></div>
+            </div>
+
+            <div class="pf-box">
+              <strong class="pf-h">VIP Notification Matrix</strong>
+              <div class="pf-switchrow"><div><strong>Premier Film Invitations</strong><p>First notification for midnight premieres</p></div><button type="button" class="pf-switch on" data-key="n1" aria-label="Premier Film Invitations"><i></i></button></div>
+              <div class="pf-switchrow"><div><strong>Director Q&amp;A Early Access</strong><p>Reserved auditorium priority window</p></div><button type="button" class="pf-switch on" data-key="n2" aria-label="Director Q&A Early Access"><i></i></button></div>
+              <div class="pf-switchrow"><div><strong>Exclusive Tasting Menu Events</strong><p>Chef's table seat previews &amp; invites</p></div><button type="button" class="pf-switch on" data-key="n3" aria-label="Exclusive Tasting Menu Events"><i></i></button></div>
+            </div>
+
+            <div class="pf-box">
+              <p class="pf-row"><span><i class="fa-solid fa-shield-halved gold"></i> Two-Factor Authentication</span><span class="gold pf-mono">ACTIVE (SMS &amp; TOTP)</span></p>
+              <p class="pf-row"><span><i class="fa-solid fa-right-left"></i> Letterboxd Sync</span><span class="pf-mono">Synced: @elena_cine</span></p>
+              <p class="pf-row"><span></span><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- PREFERENCES -->
+      <section class="pf-card">
+        <div class="pf-title"><h2><i class="fa-solid fa-bell-concierge gold"></i> Cinema &amp; In-Seat Dining Preferences</h2><a href="#" id="save-prefs">Update Preferences</a></div>
+        <div class="pf-prefs">
+          <div class="pf-pref">
+            <h3><i class="fa-solid fa-couch red"></i> Preferred Seating</h3>
+            <strong>Center Rows E–G</strong><p>Zero-Gravity Power Recliner with Dining Console</p>
+            <p class="gold pf-foot"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto-selected at booking</p>
+          </div>
+          <div class="pf-pref">
+            <h3><i class="fa-solid fa-martini-glass gold"></i> Kitchen &amp; Bar Picks</h3>
+            <ul><li>Smoked Blood Orange Soda</li><li>Truffle &amp; Gouda Warm Nachos</li><li>The Nolan Cocktail Flight</li></ul>
+            <p class="pf-foot"><a href="bar-kitchen.html">1-Click Express Cart Ready</a></p>
+          </div>
+          <div class="pf-pref">
+            <h3><i class="fa-solid fa-sliders" style="color:#d8b4fe"></i> Screening Environment</h3>
+            <p class="pf-row"><span>Quiet Packaging</span><button type="button" class="pf-val gold" data-key="p1" data-on="ALWAYS ON" data-off="OFF">ALWAYS ON</button></p>
+            <p class="pf-row"><span>Subtle Floor Light</span><button type="button" class="pf-val gold" data-key="p2" data-on="ENABLED" data-off="DISABLED">ENABLED</button></p>
+            <p class="pf-row"><span>Closed Captioning</span><button type="button" class="pf-val" data-key="p3" data-on="ON" data-off="OFF">OFF</button></p>
+            <p class="pf-foot">Customized for IMAX 3D</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- EDIT PROFILE POP-UP -->
+    <div class="modal" id="edit-modal">
+      <div class="stub-card">
+        <div class="stub-head"><h4>Edit Profile</h4><button type="button" class="icon-btn round" id="edit-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+        <form id="edit-form">
+          <label for="e-name">Display name</label>
+          <input type="text" id="e-name" maxlength="40" />
+          <label for="e-handle">Handle</label>
+          <input type="text" id="e-handle" maxlength="30" />
+          <label for="e-cinema">Home cinema</label>
+          <select id="e-cinema">
+            <option>Downtown IMAX 3D Flagship</option>
+            <option>West End Cinema</option>
+            <option>Uptown CineDome</option>
+          </select>
+          <button type="submit" class="btn-red pf-save">Save changes</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="pf-toast" id="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div>
+        <h4>CINE<span class="red">NOVA</span></h4>
+        <p>The premier midnight cinema and luxury screening experience. IMAX, Dolby Atmos, and curated cinematic feasts.</p>
+        <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-rss"></i></button>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="catalog.html">Now Showing</a>
+        <a href="catalog.html">Upcoming Premieres</a>
+        <a href="catalog.html">Cinema Theaters</a>
+        <a href="#">Film Festivals & Retrospectives</a>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <a href="#">IMAX 3D Laser</a>
+        <a href="#">Dolby Atmos Audio</a>
+        <a href="#">VIP Recliner Suites</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+        <a href="bar-kitchen.html">Bar & Kitchen</a>
+      </div>
+      <div>
+        <h4>Account &amp; VIP</h4>
+        <a href="profile.html">VIP Member Profile</a>
+        <a href="register.html">Tier Privileges</a>
+        <a href="confirmation.html">Digital Tickets</a>
+      </div>
+      <div>
+        <h4>Midnight Club</h4>
+        <p>Unlock early access tickets, reserved premiere seats, and exclusive director Q&As.</p>
+        <div class="join-row">
+          <input type="email" id="user-email" name="user-email" placeholder="Your email" />
+          <button class="btn-red">Join</button>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright">
+      <p>© 2025 CineNova Midnight Cinemas, Inc. All cinematic rights reserved.</p>
+      <p>Privacy Notice &nbsp; Terms of Ticketing &nbsp; Refund Policy &nbsp; Accessibility</p>
+    </div>
+  </div>
+
+  <script>
+    // Wait for site.js (it loads deferred) so CINENOVA_API exists
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // ---------- Saved settings (kept in this browser) ----------
+      var saved = JSON.parse(localStorage.getItem("cinenovaProfile") || "{}");
+      saved.switches = saved.switches || {};
+      saved.perks = saved.perks || [];
+      function store() { localStorage.setItem("cinenovaProfile", JSON.stringify(saved)); }
+      function $(id) { return document.getElementById(id); }
+
+      var toastTimer;
+      function toast(message) {
+        var t = $("toast"); t.textContent = message; t.classList.add("show");
+        clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2600);
+      }
+
+      // ---------- Name, handle and home cinema ----------
+      function showName() {
+        $("pf-name").textContent = saved.name || "Elena Vance";
+        $("pf-handle").textContent = saved.handle || "@elenavance";
+        $("pf-cinema").textContent = saved.cinema || "Downtown IMAX 3D Flagship";
+        var first = (saved.name || "Elena Vance").split(" ")[0];
+        $("pf-first").textContent = first; $("perk-name").textContent = first;
+        $("pass-name").textContent = (saved.name || "Elena Vance").toUpperCase() + " • VIP DIRECT ACCESS";
+      }
+      showName();
+
+      var modal = $("edit-modal");
+      $("edit-btn").addEventListener("click", function () {
+        $("e-name").value = $("pf-name").textContent; $("e-handle").value = $("pf-handle").textContent;
+        modal.classList.add("open");
+      });
+      function closeModal() { modal.classList.remove("open"); }
+      $("edit-close").addEventListener("click", closeModal);
+      modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+
+      $("edit-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = $("e-name").value.trim(), handle = $("e-handle").value.trim();
+        if (!name) { toast("Please enter a display name."); return; }
+        saved.name = name;
+        saved.handle = handle ? (handle.charAt(0) === "@" ? handle : "@" + handle) : "@" + name.toLowerCase().replace(/\s+/g, "");
+        saved.cinema = $("e-cinema").value;
+        store(); showName(); closeModal(); toast("Profile updated.");
+      });
+
+      $("share-btn").addEventListener("click", function () {
+        var text = "CineNova Obsidian Card • " + $("pf-name").textContent + " • CN-9942-8810";
+        (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(
+          function () { toast("Card details copied to your clipboard."); },
+          function () { toast("Copy isn't available in this browser."); });
+      });
+
+      // ---------- Pass QR picture (made by the server; icon if it isn't running) ----------
+      var qr = $("pf-qr-img");
+      qr.onerror = function () { qr.classList.add("hidden"); $("pf-qr-icon").classList.remove("hidden"); };
+      qr.src = CINENOVA_API + "/api/qr/CN-9942-8810.png";
+
+      $("concierge").addEventListener("click", function (e) { e.preventDefault(); toast("Concierge hotline: your VIP host will call you back within 2 minutes."); });
+
+      // ---------- Next screening: shows your most recent booking if you have one ----------
+      var order = JSON.parse(localStorage.getItem("cinenovaOrder") || "null");
+      if (order && order.booking) {
+        var b = order.booking, ids = b.seats.map(function (s) { return s.id.replace("-", ""); }).join(" & ");
+        $("nx-title").textContent = b.movie + " (" + String(b.format).split("•")[0].trim() + ")";
+        $("nx-when").textContent = b.when;
+        $("nx-seats").textContent = String(b.hall).split("•")[0].trim() + " • Seats " + ids;
+      }
+
+      // ---------- Perks: Apply turns into Applied ----------
+      function drawPerks() {
+        var left = 0;
+        document.querySelectorAll(".pf-apply").forEach(function (b) {
+          var done = saved.perks.indexOf(b.dataset.perk) > -1;
+          b.textContent = done ? "Applied ✓" : "Apply"; b.classList.toggle("applied", done);
+          if (!done) left++;
+        });
+        $("perk-count").textContent = left + (left === 1 ? " Voucher" : " Vouchers");
+      }
+      drawPerks();
+      document.querySelectorAll(".pf-apply").forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (saved.perks.indexOf(b.dataset.perk) > -1) return;
+          saved.perks.push(b.dataset.perk); store(); drawPerks(); toast("Voucher applied to your next booking.");
+        });
+      });
+
+      $("redeem").addEventListener("click", function () { toast("The Rewards Store opens soon. Your 4,850 points are safe."); });
+      $("add-card").addEventListener("click", function (e) { e.preventDefault(); toast("New cards are added securely at checkout."); });
+
+      // ---------- Switches (notifications) and preference words ----------
+      document.querySelectorAll(".pf-switch").forEach(function (s) {
+        if (saved.switches[s.dataset.key] === false) s.classList.remove("on");
+        s.addEventListener("click", function () {
+          var on = s.classList.toggle("on"); saved.switches[s.dataset.key] = on; store();
+        });
+      });
+
+      document.querySelectorAll(".pf-val").forEach(function (v) {
+        function paint(on) { v.textContent = on ? v.dataset.on : v.dataset.off; v.classList.toggle("gold", on); }
+        if (saved.switches[v.dataset.key] !== undefined) paint(saved.switches[v.dataset.key]);
+        v.addEventListener("click", function () {
+          var on = v.textContent === v.dataset.off; paint(on); saved.switches[v.dataset.key] = on; store();
+        });
+      });
+
+      $("save-prefs").addEventListener("click", function (e) { e.preventDefault(); toast("Preferences saved."); });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm Booking - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="site.js" defer></script>
+</head>
+
+<body>
+  <div class="page pay-page">
+    <header>
+      <a href="seats.html" id="back-link"><i class="fa-solid fa-arrow-left"></i> Return to Seat Selection</a>
+      <span class="secure">CineNova Box Office</span>
+    </header>
+
+    <main class="pay-grid">
+
+      <!-- LEFT: BOOKING FORM -->
+      <section class="pay-card">
+        <span class="tag gold">Step 2 of 3 • Confirm Booking</span>
+        <h1>Confirm Your Booking</h1>
+        <p class="pay-lead">Your seats are held while you confirm. Enter your details and we will send your digital pass.</p>
+
+        <form id="booking-form" novalidate>
+          <label for="b-name">Full Name</label>
+          <div class="field">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" id="b-name" placeholder="Julian Montgomery" autocomplete="name" />
+          </div>
+
+          <label for="b-email">Send my digital pass to</label>
+          <div class="field">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="text" id="b-email" placeholder="vip.patron@cinenova.com" autocomplete="email" />
+          </div>
+
+          <label for="b-phone">Phone Number (optional)</label>
+          <div class="field">
+            <i class="fa-solid fa-phone"></i>
+            <input type="text" id="b-phone" placeholder="082 123 4567" inputmode="tel" autocomplete="tel" />
+          </div>
+
+          <p class="pay-error" id="book-error"></p>
+          <button type="submit" class="submit" id="book-btn">Confirm Booking</button>
+        </form>
+
+        <p class="pay-note"><i class="fa-solid fa-ticket gold"></i> Your booking is reserved under your name. Payment is made at the cinema.</p>
+      </section>
+
+      <!-- RIGHT: ORDER SUMMARY -->
+      <aside class="pay-summary">
+        <div class="pay-hold"><span><i class="fa-regular fa-clock gold"></i> Seats held for</span><strong id="hold">10:00</strong></div>
+
+        <p class="pay-kicker">Your Booking</p>
+        <h3 id="sum-movie">Cosmic Horizon: Odyssey</h3>
+        <p id="sum-hall">Hall 1 • IMAX 3D Laser</p>
+        <p class="pay-when"><i class="fa-regular fa-calendar gold"></i> <span id="sum-when">Fri, Oct 25 • 6:45 PM</span></p>
+
+        <p class="pay-kicker">Seats</p>
+        <div class="pay-chips" id="sum-seats"></div>
+
+        <div class="pay-lines" id="sum-lines"></div>
+        <p class="pay-total"><span>Total Amount</span><strong id="sum-total">$0.00</strong></p>
+        <p class="pay-note"><i class="fa-solid fa-shield-halved gold"></i> 100% refundable up to 2h before showtime</p>
+      </aside>
+    </main>
+
+    <footer>
+      <span><i class="fa-solid fa-ticket gold"></i> CineNova Reserved Seating Booking</span>
+      <span>Auditorium Safety &nbsp; Privacy Policy &nbsp; System Status</span>
+    </footer>
+  </div>
+
+ <script>
+  // ---------- Load the booking saved by the seat page (or a sample if opened directly) ----------
+  var booking = JSON.parse(localStorage.getItem("cinenovaBooking") || "null") || {
+    movie: "Cosmic Horizon: Odyssey", rating: "PG-13", duration: "2h 46m", format: "IMAX 3D Laser • Dolby Atmos",
+    cinema: "CineNova Downtown Flagship", gate: "Fast Gate Entry • Turnstile C",
+    hall: "Hall 1 • IMAX 3D Laser", when: "Fri, Oct 25 • 6:45 PM",
+    seats: [{ id: "F8", price: "21.5", zone: "Prime Center Hall" }, { id: "F9", price: "21.5", zone: "Prime Center Hall" }],
+    lines: [["Standard Tickets (2x $21.50)", "$43.00"], ["IMAX & Laser Technology Surcharge", "$3.00"], ["Online Convenience Fee & Tax", "$3.68"]],
+    total: "$49.68"
+  };
+  window.booking = booking;   // booking.js falls back to this
+
+  document.getElementById("sum-movie").textContent = booking.movie;
+  document.getElementById("sum-hall").textContent = booking.hall;
+  document.getElementById("sum-when").textContent = booking.when;
+  document.getElementById("sum-total").textContent = booking.total;
+
+  booking.seats.forEach(function (s) {
+    var chip = document.createElement("span");
+    chip.className = "pay-chip";
+    chip.textContent = s.id.replace("-", "");
+    document.getElementById("sum-seats").appendChild(chip);
+  });
+
+  booking.lines.forEach(function (l) {
+    var row = document.createElement("p");
+    row.innerHTML = "<span></span><span></span>";
+    row.children[0].textContent = l[0];
+    row.children[1].textContent = l[1];
+    document.getElementById("sum-lines").appendChild(row);
+  });
+
+  // ---------- Seat hold timer ----------
+  var left = 10 * 60;
+  function expire() {
+    alert("Your seat hold expired. Please choose your seats again.");
+    location.href = booking.back || "seats.html";
+  }
+  var timer = setInterval(function () {
+    if (left > 0) left--;
+    document.getElementById("hold").textContent =
+      String(Math.floor(left / 60)).padStart(2, "0") + ":" + String(left % 60).padStart(2, "0");
+    if (left === 0) { clearInterval(timer); expire(); }
+  }, 1000);
+</script>
+  <script type="module" src="booking.js" ></script>
+</body>
+</html>

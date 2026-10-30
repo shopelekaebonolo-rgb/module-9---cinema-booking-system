@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seat Selection - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="Javascript/site.js" defer></script>
+</head>
+
+<body>
+  <!-- "home" gives the top bar, buttons and footer; "seats" adds this page's own styles -->
+  <div class="home seats">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <a href="dashboard.html" class="logo-link"><img src="Images/screen.png" alt="CineNova" class="logo" /></a>
+      <button type="button" class="menu-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+
+      <button class="btn-red" data-href="catalog.html">Now Showing</button>
+
+      <div class="field">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search" placeholder="Search movies, directors, cast..." />
+      </div>
+      <button class="icon-btn ticket-btn">
+        <i class="fa-solid fa-ticket gold"></i><span class="count">2</span>
+      </button>
+      <a class="avatar" href="profile.html" title="My profile"><img src="" alt="Profile" /></a>
+    </header>
+
+    <main>
+      <!-- MOVIE INFO BAR -->
+      <section class="hall-bar">
+        <div class="hall-left">
+          <a href="catalog.html"><i class="fa-solid fa-arrow-left"></i> Now Showing</a>
+          <span>•</span>
+          <strong>          </strong>
+          <span class="tag">IMAX 3D Laser</span>
+          <span class="tag gold">Dolby Atmos</span>
+        </div>
+        <div class="hall-right">
+          <span><i class="fa-solid fa-masks-theater gold"></i> CineNova Downtown • Hall 1</span>
+          <span><i class="fa-regular fa-calendar red"></i> Fri, Oct 25 • 6:45 PM</span>
+          <span><i class="fa-regular fa-clock"></i> 2h 46m</span>
+        </div>
+      </section>
+
+      <div class="seat-layout">
+
+        <!-- SEAT MAP -->
+        <section class="map-card">
+          <div class="screen-arc"></div>
+          <p class="screen-text"><i class="fa-solid fa-video"></i> All eyes on screen • Hall 1 IMAX curved surface</p>
+
+          <div class="map-legend">
+            <span><i class="key avail"></i> Available ($18.50)</span>
+            <span><i class="key pick"></i> <b class="gold">Selected</b></span>
+            <span><i class="key booked"></i> Booked</span>
+            <span><i class="key vip"><i class="fa-solid fa-star"></i></i> VIP Recliner ($26.50)</span>
+            <span><i class="fa-solid fa-wheelchair"></i> Companion</span>
+          </div>
+
+          <div class="map-scroll">
+            <div id="map"></div>
+            <p class="vip-banner"><i class="fa-regular fa-gem"></i> VIP Ultra-Recliners Suite • Wide Spacing & Motorized Footrests</p>
+            <div id="vip-map"></div>
+          </div>
+
+          <div class="map-foot">
+            <p><i class="fa-solid fa-circle-info gold"></i> Maximum 8 seats per order</p>
+            <p><i class="fa-solid fa-volume-high"></i> Dolby Atmos 64-Channel Sound</p>
+            <div>
+              <button class="btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
+              <button class="btn" id="reset"><i class="fa-solid fa-arrows-rotate"></i> Reset View</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ORDER SIDEBAR -->
+        <aside>
+          <div class="timer">
+            <strong class="gold"><i class="fa-regular fa-clock"></i> Seats held for:</strong>
+            <span id="timer">09:39</span>
+          </div>
+
+          <div class="order">
+            <div class="order-head">
+              <div class="mini-poster-box">
+                <img src="Images/Cosmic Horizon Odyssey (2024).png" alt="Cosmic Horizon poster" class="poster-photo" />
+                <span>IMAX</span>
+              </div>
+              <div>
+                <p class="kicker">Featured Presentation</p>
+                <h3>Cosmic Horizon: Odyssey</h3>
+                <p>Hall 1 • Laser 3D Projection</p>
+                <div class="head-tags"><span class="tag">PG-13</span><span class="tag">2h 46m</span></div>
+              </div>
+            </div>
+
+            <div class="when">
+              <strong><i class="fa-regular fa-calendar gold"></i> Friday, Oct 25</strong>
+              <strong><i class="fa-regular fa-clock red"></i> 6:45 PM</strong>
+            </div>
+
+            <div class="sel-head"><h4>Selected Seats</h4><span class="tag gold" id="sel-count">2 Seats Chosen</span></div>
+            <div id="sel-list"></div>
+
+            <div class="sel-head"><h4>Cinema Concessions</h4><span class="kicker">Fast Pickup</span></div>
+            <div class="extra">
+              <i class="fa-solid fa-mug-hot gold"></i>
+              <div class="grow"><strong>Large Gourmet Popcorn</strong><p>Warm Real Butter +$8.50</p></div>
+              <button class="btn add" data-price="8.5"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+            <div class="extra">
+              <i class="fa-solid fa-bottle-water pink"></i>
+              <div class="grow"><strong>Midnight Craft Soda (2x)</strong><p>Blood Orange Infused +$7.00</p></div>
+              <button class="btn add" data-price="7"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+
+            <div class="price-box">
+              <p><span id="t-label">Standard Tickets (2x $21.50)</span><span id="t-val">$43.00</span></p>
+              <p><span>IMAX & Laser Technology Surcharge</span><span id="s-val">$3.00</span></p>
+              <p id="e-row" class="hidden"><span>Cinema Concessions</span><span id="e-val">$0.00</span></p>
+              <p><span>Online Convenience Fee & Tax</span><span id="f-val">$3.68</span></p>
+              <p class="total-row"><strong>Total Amount</strong><strong id="total">$49.68</strong></p>
+            </div>
+
+            <button class="pay" id="pay"><i class="fa-solid fa-money-bill-wave"></i> Proceed to Booking ($49.68)</button>
+            <p class="note"><i class="fa-solid fa-shield-halved gold"></i> Guaranteed Reserved Seating • 100% Refundable up to 2h prior</p>
+          </div>
+
+          <a href="dashboard.html" class="entry">
+            <i class="fa-solid fa-qrcode"></i>
+            <div class="grow"><strong>Contactless Entry</strong><p>Digital pass sent to your phone & Apple Wallet</p></div>
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </aside>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div>
+        <h4>CINE<span class="red">NOVA</span></h4>
+        <p>The premier midnight cinema and luxury screening experience. IMAX, Dolby Atmos, and curated cinematic feasts.</p>
+        <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-rss"></i></button>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="catalog.html">Now Showing</a>
+        <a href="catalog.html">Upcoming Premieres</a>
+        <a href="catalog.html">Cinema Theaters</a>
+        <a href="#">Film Festivals & Retrospectives</a>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <a href="#">IMAX 3D Laser</a>
+        <a href="#">Dolby Atmos Audio</a>
+        <a href="#">VIP Recliner Suites</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+        <a href="bar-kitchen.html">Bar & Kitchen</a>
+      </div>
+      <div>
+        <h4>Locations</h4>
+        <h5>Downtown Flagship</h5><p>IMAX • Dolby • VIP Lounge</p>
+        <h5>West End Cinema</h5><p>4DX • Midnight Screenings</p>
+        <h5>Uptown CineDome</h5><p>70mm Projection • Terrace Bar</p>
+      </div>
+      <div>
+        <h4>Midnight Club</h4>
+        <p>Unlock early access tickets, reserved premiere seats, and exclusive director Q&As.</p>
+        <div class="join-row">
+          <input type="email" id="user-email" name="user-email" placeholder="Your email" />
+          <button class="btn-red">Join</button>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright">
+      <p>© 2025 CineNova Midnight Cinemas, Inc. All cinematic rights reserved.</p>
+      <p>Privacy Notice &nbsp; Terms of Ticketing &nbsp; Refund Policy &nbsp; Accessibility</p>
+    </div>
+  </div>
+  <script>
+    // ---------- Seat data ----------
+    var booked = { A: [3, 7, 8, 9, 14], B: [5, 6, 11], C: [4, 5, 12, 13], D: [8, 9], E: [3, 10, 11], F: [6, 7], G: [8, 9], H: [4, 5, 13] };
+    var vipBooked = ["I-4", "I-5"];
+    var picked = [];
+    var MAX = 8, SURCHARGE = 1.5, FEE = 0.08;
+
+    var map = document.getElementById("map");
+    var vipMap = document.getElementById("vip-map");
+
+    // Rows A-H: seats 1-3 | 4-13 | 14-16. A1 and A16 are companion (wheelchair) seats.
+    Object.keys(booked).forEach(function (row) {
+      var prime = "CDEFG".indexOf(row) > -1;
+      var html = '<div class="chair-row"><b class="rowtag">' + row + "</b>";
+      [[1, 3], [4, 13], [14, 16]].forEach(function (range) {
+        html += '<div class="chair-group">';
+        for (var n = range[0]; n <= range[1]; n++) {
+          var id = row + n;
+          if (id === "A1" || id === "A16") {
+            html += '<button class="chair companion" disabled><i class="fa-solid fa-wheelchair"></i></button>';
+            continue;
+          }
+          var cls = "chair" + (booked[row].indexOf(n) > -1 ? " booked" : "") + (picked.indexOf(id) > -1 ? " selected" : "");
+          html += '<button class="' + cls + '" data-id="' + id + '" data-row="' + row + '" data-num="' + n + '"' +
+                  ' data-price="' + (prime ? 21.5 : 18.5) + '" data-zone="' + (prime ? "Prime Center Hall" : "Standard Section") + '">' + n + "</button>";
+        }
+        html += "</div>";
+      });
+      map.insertAdjacentHTML("beforeend", html + '<b class="rowtag">' + row + "</b></div>");
+    });
+
+    // VIP rows I and J: 10 recliners each, grouped 2 | 3 | 3 | 2
+    ["I", "J"].forEach(function (row) {
+      var html = '<div class="chair-row"><b class="rowtag vip-tag">' + row + "</b>";
+      [[1, 2], [3, 5], [6, 8], [9, 10]].forEach(function (range) {
+        html += '<div class="chair-group">';
+        for (var n = range[0]; n <= range[1]; n++) {
+          var id = row + "-" + n;
+          html += '<button class="chair vip' + (vipBooked.indexOf(id) > -1 ? " booked" : "") + '" data-id="' + id + '" data-row="' + row + '" data-num="' + n + '"' +
+                  ' data-price="26.5" data-zone="VIP Recliner Suite">' + id + "</button>";
+        }
+        html += "</div>";
+      });
+      vipMap.insertAdjacentHTML("beforeend", html + '<b class="rowtag vip-tag">' + row + "</b></div>");
+    });
+
+    // ---------- Clicking seats ----------
+    document.querySelector(".map-card").addEventListener("click", function (e) {
+      var chair = e.target.closest(".chair");
+      if (!chair || chair.classList.contains("booked") || chair.disabled) return;
+      if (!chair.classList.contains("selected") && document.querySelectorAll(".chair.selected").length >= MAX) {
+        alert("Maximum " + MAX + " seats per order");
+        return;
+      }
+      chair.classList.toggle("selected");
+      update();
+    });
+
+    // Reset View: clear every seat
+    document.getElementById("reset").addEventListener("click", function () {
+      document.querySelectorAll(".chair.selected").forEach(function (c) { c.classList.remove("selected"); });
+      update();
+    });
+
+    // Snacks: Add / Added
+    document.querySelectorAll(".add").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        btn.classList.toggle("added");
+        btn.innerHTML = btn.classList.contains("added")
+          ? '<i class="fa-solid fa-check"></i> Added'
+          : '<i class="fa-solid fa-plus"></i> Add';
+        update();
+      });
+    });
+
+    // The small x next to a chosen seat removes it
+    document.getElementById("sel-list").addEventListener("click", function (e) {
+      var x = e.target.closest("[data-remove]");
+      if (!x) return;
+      document.querySelector('.chair[data-id="' + x.dataset.remove + '"]').classList.remove("selected");
+      update();
+    });
+
+    // ---------- Order summary ----------
+    function money(n) { return "$" + n.toFixed(2); }
+
+    function update() {
+      var chosen = Array.from(document.querySelectorAll(".chair.selected"));
+      var tickets = 0, list = "";
+
+      chosen.forEach(function (c) {
+        var price = parseFloat(c.dataset.price);
+        tickets += price;
+        list += '<div class="sel-item"><b class="seat-chip">' + c.dataset.id.replace("-", "") + "</b>" +
+                '<div class="grow"><strong>Row ' + c.dataset.row + ", Seat " + c.dataset.num + "</strong><p>" + c.dataset.zone + "</p></div>" +
+                "<strong>" + money(price) + '</strong><button class="x" data-remove="' + c.dataset.id + '"><i class="fa-regular fa-circle-xmark"></i></button></div>';
+      });
+
+      var extras = 0;
+      document.querySelectorAll(".add.added").forEach(function (b) { extras += parseFloat(b.dataset.price); });
+
+      var surcharge = chosen.length * SURCHARGE;
+      var fee = Math.round((tickets + surcharge + extras) * FEE * 100) / 100;
+      var total = tickets + surcharge + extras + fee;
+      var samePrice = chosen.every(function (c) { return c.dataset.price === chosen[0].dataset.price; });
+
+      document.getElementById("sel-list").innerHTML = list || '<p class="empty">No seats selected yet</p>';
+      document.getElementById("sel-count").textContent = chosen.length + (chosen.length === 1 ? " Seat Chosen" : " Seats Chosen");
+      document.getElementById("t-label").textContent = chosen.length && samePrice
+        ? "Standard Tickets (" + chosen.length + "x " + money(parseFloat(chosen[0].dataset.price)) + ")"
+        : "Tickets (" + chosen.length + " seats)";
+      document.getElementById("t-val").textContent = money(tickets);
+      document.getElementById("s-val").textContent = money(surcharge);
+      document.getElementById("e-row").classList.toggle("hidden", extras === 0);
+      document.getElementById("e-val").textContent = money(extras);
+      document.getElementById("f-val").textContent = money(fee);
+      document.getElementById("total").textContent = money(total);
+      document.getElementById("pay").innerHTML = '<i class="fa-solid fa-money-bill-wave"></i> Proceed to Booking (' + money(total) + ")";
+    }
+
+    // ---------- Hold timer (counts down from 09:39) ----------
+    var seconds = 9 * 60 + 39;
+    setInterval(function () {
+      if (seconds > 0) seconds--;
+      var m = String(Math.floor(seconds / 60)).padStart(2, "0");
+      var s = String(seconds % 60).padStart(2, "0");
+      document.getElementById("timer").textContent = m + ":" + s;
+    }, 1000);
+
+    update();
+  </script>
+  <script type="module" src="Javascript/seats.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Registration - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="site.js" defer></script>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <a href="login.html"><i class="fa-solid fa-arrow-left"></i> Return to Cinema Portal</a>
+      <span class="secure">Encrypted Luxury Portal</span>
+    </header>
+
+    <main class="grid">
+      <!-- LEFT SIDE -->
+      <section>
+        <img src="Images/screen.png" alt="CineNova" class="logo" />
+        <h1>Step Into The Master Auditorium</h1>
+        <p class="lead">
+          Unlock curated cinema seating, priority 70mm reservations, and
+          velvet-rope culinary lounge amenities.
+        </p>
+
+        <div class="card">
+          <div class="toggle">
+            <button id="btn-silver" class="active" onclick="showTier('silver')">Silver Cinephile</button>
+            <button id="btn-gold" onclick="showTier('gold')"><i class="fa-regular fa-star"></i> Gold VIP Lounge</button>
+          </div>
+
+          <!-- SILVER TIER -->
+          <div id="silver">
+            <p class="eyebrow">Standard welcome tier</p>
+            <div class="price-row">
+              <p class="price">Complimentary</p>
+              <span class="badge">Entry level</span>
+            </div>
+            <ul>
+              <li><i class="fa-regular fa-circle-check"></i> Direct digital ticketing & contactless auditorium access.</li>
+              <li><i class="fa-regular fa-circle-check"></i> Standard reward points on all concession stand items.</li>
+              <li><i class="fa-regular fa-circle-check"></i> Free large popcorn refill on all double-feature screenings.</li>
+            </ul>
+          </div>
+
+          <!-- GOLD TIER -->
+          <div id="gold" class="hidden">
+            <p class="eyebrow">Ultra-luxury access</p>
+            <div class="price-row">
+              <p class="price">$14.99 <small>/ month</small></p>
+              <span class="badge2">Most desired</span>
+            </div>
+            <ul>
+              <li><i class="fa-regular fa-circle-check"></i> <strong>Zero booking fees</strong> on unlimited orders.</li>
+              <li><i class="fa-regular fa-circle-check"></i> <strong>48h early IMAX 70mm access</strong> to premium seats.</li>
+              <li><i class="fa-regular fa-circle-check"></i> <strong>20% gourmet dining</strong> discount with in-seat delivery.</li>
+              <li><i class="fa-regular fa-circle-check"></i> <strong>Annual birthday ticket:</strong> a dual pass to any gala.</li>
+            </ul>
+          </div>
+
+          <div class="testimonial">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop" alt="Eleanor Vance" />
+            <div>
+              <div class="stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p>"Secured center-row Oppenheimer 70mm tickets instantly."</p>
+              <small>Eleanor Vance • Founding VIP Patron</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="amenities">
+          <span><i class="fa-solid fa-masks-theater red"></i> IMAX Dual Laser</span>
+          <span><i class="fa-solid fa-video gold"></i> Dolby Atmos 128ch</span>
+          <span><i class="fa-solid fa-couch pink"></i> Heated Loungers</span>
+        </div>
+      </section>
+
+      <!-- RIGHT SIDE -->
+      <section class="form-card">
+        <div class="stepper">
+          <div class="step active"><span>1</span> Account Details</div>
+          <div class="line"></div>
+          <div class="step"><span>2</span> Cinema Venue</div>
+          <div class="line"></div>
+          <div class="step"><span>3</span> VIP Perks</div>
+        </div>
+
+        <h2>Register Your Patron Dossier</h2>
+        <p class="small">Configure your biometric and digital credentials for instant cinema admissions.</p>
+
+        <form id="register-form">
+          <div class="row">
+            <div>
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" placeholder="Julian" required />
+            </div>
+            <div>
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" placeholder="Montgomery" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="email">Official Patron Email</label>
+              <input type="email" id="email" name="email" placeholder="julian@montgomery.film" required/>
+            </div>
+            <div>
+              <label for="phone">Mobile Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 (555) 234-8900" required/>
+            </div>
+          </div>
+
+          <label for="password">Security Passcode</label>
+          <input type="password" id="password" name="password" placeholder="********" required/>
+
+          <label for="theater">Preferred Flagship Theater</label>
+          <select name="theater" id="theater">
+            <option value="imax">Downtown Flagship — IMAX 70mm Laser & Velvet VIP Lounge</option>
+            <option value="dolby">Beverly Hills Pavilion — Dolby Cinema & Sommelier Bar</option>
+            <option value="35mm">Tribeca Grand — 35mm Archival & Director's Suite</option>
+            <option value="4dx">Metropolis Center — 4DX Motion Experience & ScreenX</option>
+          </select>
+
+          <p class="label">Preferred Cinema Formats</p>
+          <div class="formats">
+            <label><input type="checkbox" name="formats" value="imax" /> IMAX 70mm</label>
+            <label><input type="checkbox" name="formats" value="dolby" /> Dolby Atmos</label>
+            <label><input type="checkbox" name="formats" value="4dx" /> 4DX Motion</label>
+            <label><input type="checkbox" name="formats" value="dining" /> VIP Dining</label>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" name="terms" required/>
+            I agree to the <a href="https://example.com" target="_blank">Auditorium Terms of Protocol</a> and CineNova Patron By-Laws.
+          </label>
+          <label class="check">
+            <input type="checkbox" name="invites" />
+            Receive private invitations to confidential red-carpet screenings & director Q&A sessions.
+          </label>
+
+          <button type="submit" class="submit" id="signUp">
+            <i class="fa-regular fa-id-card"></i> Complete CineNova VIP Registration <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <p class="signin">Already possess credentials? <a href="login.html">Authenticate & Sign In</a></p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <span><i class="fa-solid fa-lock gold"></i> 256-Bit SSL Cinematic Box Office Security Matrix</span>
+      <span>Auditorium Safety &nbsp; Privacy Policy &nbsp; System Status</span>
+    </footer>
+  </div>
+
+  <script>
+    function showTier(tier) {
+      document.getElementById("silver").classList.toggle("hidden", tier !== "silver");
+      document.getElementById("gold").classList.toggle("hidden", tier !== "gold");
+      document.getElementById("btn-silver").classList.toggle("active", tier === "silver");
+      document.getElementById("btn-gold").classList.toggle("active", tier === "gold");
+    }
+  </script>
+  <script type="module" src="./Auth/signup.js"></script>
+</body>
+</html>

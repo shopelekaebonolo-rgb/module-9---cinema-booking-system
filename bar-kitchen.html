@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bar & Kitchen - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="site.js" defer></script>
+</head>
+
+<body>
+  <!-- "home" gives the top bar, buttons and footer; "kitchen" adds this page's own styles -->
+  <div class="home kitchen">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <a href="dashboard.html" class="logo-link"><img src="Images/screen.png" alt="CineNova" class="logo" /></a>
+      <button type="button" class="menu-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <select name="theater" id="cinema">
+        <option>Downtown IMAX 3D</option>
+        <option>West End Cinema</option>
+        <option>Uptown CineDome</option>
+      </select>
+      <button class="btn-red" data-href="dashboard.html" >Now Showing</button>
+      <nav>
+
+        <a href="profile.html#perks">Offers</a>
+      </nav>
+      <div class="field">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search" placeholder="Search movies, concessions, cocktails..." />
+      </div>
+      <button class="icon-btn ticket-btn">
+        <i class="fa-solid fa-ticket gold"></i><span class="count">2</span>
+      </button>
+      <a class="avatar" href="profile.html" title="My profile"><img src="" alt="Profile" /></a>
+    </header>
+
+    <main>
+      <p class="k-crumbs">
+        <a href="dashboard.html">Cinema Experiences</a> › <strong>Bar &amp; Kitchen</strong>
+        <span class="tag gold"><i class="fa-solid fa-circle dot"></i> VIP In-Seat Dining</span>
+      </p>
+
+      <!-- HEADING + DELIVERY SETTINGS -->
+      <section class="k-head">
+        <div>
+          <h1>CineNova <span class="red">Bar &amp; Kitchen</span></h1>
+          <p class="k-lead">Chef-crafted artisanal cinema dining delivered directly to your VIP zero-gravity recliner seat. Silent silver-cart service timed impeccably to the lights dimming.</p>
+          <div class="k-window" id="window">
+            <span class="k-label">Delivery Window:</span>
+            <button type="button" class="k-chip active"><i class="fa-regular fa-clock"></i> Pre-Roll Trailers (Recommended)</button>
+            <button type="button" class="k-chip">During Intermission</button>
+            <button type="button" class="k-chip">Silent On-Demand Button Call</button>
+          </div>
+        </div>
+
+        <div class="k-dest">
+          <i class="fa-solid fa-couch gold"></i>
+          <div class="grow"><p>Active Seat Destination</p><strong id="dest">Screen 4 IMAX Laser • F12, F13</strong></div>
+          <button type="button" class="k-quiet on" id="quiet"><i class="fa-solid fa-volume-xmark"></i> Quiet Packaging: <b>ON</b></button>
+          <button type="button" class="icon-btn" id="edit-seat" aria-label="Change seats"><i class="fa-solid fa-pen"></i></button>
+        </div>
+      </section>
+
+      <div class="k-layout">
+
+        <!-- MENU -->
+        <div class="k-menu">
+          <div class="k-tabs" id="tabs">
+            <button type="button" class="k-tab active" data-cat="all">All Menu</button>
+            <button type="button" class="k-tab" data-cat="pairings">Chef Pairings</button>
+            <button type="button" class="k-tab" data-cat="plates">Artisan Small Plates</button>
+            <button type="button" class="k-tab" data-cat="popcorn">Popcorn &amp; Treats</button>
+            <button type="button" class="k-tab" data-cat="cocktails">Craft Cocktails</button>
+            <button type="button" class="k-tab" data-cat="zero">Zero-Proof Elixirs</button>
+          </div>
+
+          <div class="k-filters" id="filters">
+            <span class="k-label">Filter:</span>
+            <button type="button" class="k-filter" data-tag="imax"><i class="fa-solid fa-ticket"></i> Pairs with IMAX</button>
+            <button type="button" class="k-filter" data-tag="veg"><i class="fa-solid fa-leaf"></i> Vegetarian</button>
+            <button type="button" class="k-filter" data-tag="gold"><i class="fa-regular fa-star"></i> VIP Gold Choice</button>
+            <button type="button" class="k-filter" data-tag="gf"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i> Gluten-Free</button>
+          </div>
+
+          <section class="k-sec" data-sec="pairings">
+            <p class="k-kicker">Curated Gastronomy</p>
+            <div class="k-sec-head"><h2>Chef Signature Pairings</h2><p>Synchronized multi-course seat delivery</p></div>
+            <div class="k-grid two" id="grid-pairings"></div>
+          </section>
+
+          <section class="k-sec" data-sec="plates">
+            <p class="k-kicker">Warm &amp; Savory</p>
+            <div class="k-sec-head"><h2>Artisan Small Plates</h2></div>
+            <div class="k-grid three" id="grid-plates"></div>
+          </section>
+
+          <section class="k-sec" data-sec="popcorn">
+            <p class="k-kicker">The Cinema Tradition Elevated</p>
+            <div class="k-sec-head"><h2>Popcorn &amp; Confectionery</h2></div>
+            <div class="k-grid two" id="grid-popcorn"></div>
+          </section>
+
+          <section class="k-sec" data-sec="drinks">
+            <p class="k-kicker">Mixology Under Projection</p>
+            <div class="k-sec-head"><h2>Craft Libations &amp; Elixirs</h2></div>
+            <div class="k-grid three" id="grid-drinks"></div>
+          </section>
+
+          <p class="k-empty hidden" id="none">Nothing matches those filters. Clear one to see more dishes.</p>
+
+          <div class="k-guarantee">
+            <span class="k-gicon"><i class="fa-solid fa-bell-concierge gold"></i></span>
+            <div>
+              <strong>The CineNova Silence Guarantee</strong>
+              <p>Every beverage vessel is wrapped with acoustic dampening neoprene, nachos are baked on quiet-crisp parchment, and servers use infrared floor beams to ensure 0% light interference with your movie.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- IN-SEAT TRAY -->
+        <aside class="k-tray">
+          <div class="k-tray-head"><h3><i class="fa-solid fa-bell-concierge red"></i> In-Seat Tray</h3><span class="tag f-red" id="tray-count">2 items</span></div>
+
+          <div class="k-target">
+            <p><span>Delivery Target</span><b class="gold"><i class="fa-solid fa-circle dot"></i> Live Screen Synced</b></p>
+            <strong>Dune: Part Two (IMAX 70mm Laser)</strong>
+            <p><span>Auditorium 4 • Seats <span id="tray-seats">F12, F13</span></span><span>8:15 PM</span></p>
+          </div>
+
+          <div id="tray-list"></div>
+
+          <button type="button" class="k-light on" id="light"><i class="fa-regular fa-lightbulb gold"></i> Red-Spectrum Floor Lighting <b>ENABLED</b></button>
+
+          <div class="k-sums">
+            <p><span>Items Subtotal</span><span id="s-sub">$0.00</span></p>
+            <p><span>VIP In-Seat Service Fee</span><span>Complimentary</span></p>
+            <p><span>Estimated Tax</span><span id="s-tax">$0.00</span></p>
+            <p class="k-total"><strong>Total Order</strong><strong id="s-total">$0.00</strong></p>
+          </div>
+
+          <div class="k-points">
+            <p><span><i class="fa-solid fa-star gold"></i> CineNova Points Earned</span><b class="gold" id="pts-text">+0 PTS</b></p>
+            <div class="k-bar"><span id="pts-bar"></span></div>
+          </div>
+
+          <button type="button" class="k-confirm" id="confirm"><i class="fa-solid fa-check-double"></i> Confirm In-Seat Order</button>
+          <p class="k-sent hidden" id="sent"></p>
+          <p class="k-note">Delivered within 10-15 minutes of screening start. Payment charged to card on file (...4082).</p>
+        </aside>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div>
+        <h4>CINE<span class="red">NOVA</span></h4>
+        <p>The premier midnight cinema and luxury screening experience. IMAX, Dolby Atmos, and curated cinematic feasts.</p>
+        <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-rss"></i></button>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="catalog.html">Now Showing</a>
+        <a href="catalog.html">Upcoming Premieres</a>
+        <a href="catalog.html">Cinema Theaters</a>
+        <a href="#">Film Festivals & Retrospectives</a>
+      </div>
+      <div>
+        <h4>Experiences</h4>
+        <a href="#">IMAX 3D Laser</a>
+        <a href="#">Dolby Atmos Audio</a>
+        <a href="#">VIP Recliner Suites</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+        <a href="bar-kitchen.html">Bar & Kitchen</a>
+      </div>
+      <div>
+        <h4>Locations</h4>
+        <h5>Downtown Flagship</h5><p>IMAX • Dolby • VIP Lounge</p>
+        <h5>West End Cinema</h5><p>4DX • Midnight Screenings</p>
+        <h5>Uptown CineDome</h5><p>70mm Projection • Terrace Bar</p>
+      </div>
+      <div>
+        <h4>Midnight Club</h4>
+        <p>Unlock early access tickets, reserved premiere seats, and exclusive director Q&As.</p>
+        <div class="join-row">
+          <input type="email" id="user-email" name="user-email" placeholder="Your email" />
+          <button class="btn-red">Join</button>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright">
+      <p>© 2025 CineNova Midnight Cinemas, Inc. All cinematic rights reserved.</p>
+      <p>Privacy Notice &nbsp; Terms of Ticketing &nbsp; Refund Policy &nbsp; Accessibility</p>
+    </div>
+  </div>
+
+  <script>
+    // ---------- The menu (edit a dish here and the page updates) ----------
+    // look: big = large card | plate = small card | wide = picture on the left | drink = small card with a top label
+    // tags (for the filter buttons): imax, veg, gold, gf
+    var dishes = [
+      { id: "flight", sec: "pairings", look: "big", name: "The Nolan Interstellar Flight", price: 34, pts: 120, badge: "Chef Featured", badge2: "4.9 (420+ reviews)", img: "Images/The Nolan Interstellar Flight.png",
+        desc: "Smoked Blood Orange Soda or Rye Old Fashioned, Truffle & Gouda Artisan Nachos, accompanied by Heirloom Dark Chocolate Caramel...",
+        chips: ["3 Courses", "Pairs with 70mm & IMAX", "Silent Service"], tags: ["imax", "gold"], note: "Quiet Plate" },
+      { id: "noir", sec: "pairings", look: "big", name: "The Midnight Noir Pairing", price: 38.5, pts: 140, badge: "VIP Reserve", badge2: "Sommelier Match", img: "Images/The Midnight Noir Pairing.png",
+        desc: "Twin smoked wagyu smash sliders with bacon jam, rosemary-truffle parmesan frites, paired with our Napa Reserve Cabernet Sauvignon.",
+        chips: ["Savory & Wine", "Warm Recliner Tray"], tags: ["gold"], note: "Warm Tray" },
+
+      { id: "nachos", sec: "plates", look: "plate", name: "Truffle & Gouda Nachos", price: 16, pts: 70, badge: "Signature Item", img: "Images/Truffle & Gouda Nachos.png",
+        desc: "Crispy golden heirloom tortilla chips loaded with melted aged gouda, black summer truffle cream...", foot: "Vegetarian", tags: ["veg", "gf"], note: "Quiet Plate" },
+      { id: "bao", sec: "plates", look: "plate", name: "Crispy Duck Bao Buns", price: 17.5, pts: 80, badge: "Chef Specialty", img: "Images/Crispy Duck Bao Buns.png",
+        desc: "Slow-braised duck leg, Cantonese hoisin lacquer, pickled Persian cucumbers, and crispy fried...", foot: "2 Pieces", tags: ["imax"], note: "Quiet Plate" },
+      { id: "crostini", sec: "plates", look: "plate", name: "Burrata & Peach Crostini", price: 15, pts: 65, badge: "Seasonal", img: "Images/Burrata & Peach Crostini.png",
+        desc: "Creamy Pugliese burrata, wood-grilled sweet peaches, habanero hot honey drizzle, fresh min...", foot: "Vegetarian", tags: ["veg"], note: "Quiet Plate" },
+
+      { id: "popcorn", sec: "popcorn", look: "wide", name: "Caramel Popcorn Trio Blend", price: 14.5, pts: 60, img:"Images/Gourmet cinema concession photo of Caramel Popcorn Trio artisan.png",
+        desc: "Handcrafted dark chocolate drizzle, sea salt butter, and rich golden maple glazed popcorn presented in an insulated matte black CineNova keepsake tin.",
+        chips: ["Refillable during screening"], foot: "Silent chewing recipe", tags: ["veg", "gf", "imax"], note: "Keepsake Tin" },
+      { id: "churro", sec: "popcorn", look: "wide", name: "Smoked Cinnamon Churro Bites", price: 12, pts: 50, img: "Images/Smoked Cinnamon Churro Bites.png",
+        desc: "Crispy piped brioche churros rolled in Saigon cinnamon & smoked demerara crystals. Served with warm salted dulce de leche dipping fondue.",
+        chips: ["Warm from the oven"], foot: "10 Pieces", tags: ["veg"], note: "Warm Box" },
+
+      { id: "soda", sec: "zero", look: "drink", name: "Smoked Blood Orange Soda", price: 8, pts: 35, badge: "Zero-Proof", img: "Images/Smoked Blood Orange Soda.png",
+        desc: "House-brewed Sicilian blood orange botanical soda, charred citrus wheel, hand-pressed...", foot: "Non-Alcoholic", tags: ["veg", "gf", "imax"], note: "Zero-Proof" },
+      { id: "oldfashioned", sec: "cocktails", look: "drink", name: "Event Horizon Old Fashioned", price: 19, pts: 85, badge: "21+ Signature", img: "Images/Event Horizon Old Fashioned.png",
+        desc: "Woodford Reserve Bourbon, charred black cherry bitters, angostura bitters, hickory...", foot: "Smoked Bourbon", tags: ["gold", "gf"], note: "21+ Signature" },
+      { id: "spritz", sec: "cocktails", look: "drink", name: "Cyberpunk Neon Spritz", price: 18, pts: 80, badge: "Luminescent", img: "Images/Cyberpunk Neon Spritz.png",
+        desc: "Empress 1908 indigo gin, Japanese yuzu liqueur, organic prosecco, topped with swirling edible...", foot: "Shimmering", tags: ["gold"], note: "21+ Signature" }
+    ];
+
+    // The tray starts with the two items from the design
+    var tray = { nachos: 1, soda: 1 };
+    var TAX = 0.09, POINTS_GOAL = 140;
+    var byId = {};
+    dishes.forEach(function (d) { byId[d.id] = d; });
+
+    function money(n) { return "$" + n.toFixed(2); }
+
+    // ---------- Draw the dish cards ----------
+    function cardHtml(d) {
+      var pic = '<div class="k-pic ' + d.sec + '"><img src="' + d.img + '" alt="' + d.name + '" />';
+      var tagsAttr = ' data-tags="' + d.tags.join(" ") + '" data-sec="' + d.sec + '"';
+
+      if (d.look === "big") {
+        return '<article class="k-card big"' + tagsAttr + '>' + pic + '<span class="k-badge red-bg">' + d.badge + '</span><span class="k-badge2">' + d.badge2 + '</span></div>' +
+          '<div class="k-body"><h4>' + d.name + ' <b class="gold">' + money(d.price) + '</b></h4><p>' + d.desc + '</p>' +
+          '<div class="k-mini">' + d.chips.map(function (c) { return "<span>" + c + "</span>"; }).join("") + '</div>' +
+          '<div class="k-foot"><span>+' + d.pts + ' Club Points</span><button type="button" class="k-add ' + (d.id === "flight" ? "red" : "grey") + '" data-add="' + d.id + '"><i class="fa-solid fa-plus"></i> Add to Seat</button></div></div></article>';
+      }
+      if (d.look === "wide") {
+        return '<article class="k-card wide"' + tagsAttr + '>' + pic + '</div><div class="k-body"><h4>' + d.name + ' <b class="gold">' + money(d.price) + '</b></h4><p>' + d.desc + '</p>' +
+          '<div class="k-mini">' + d.chips.map(function (c) { return "<span>" + c + "</span>"; }).join("") + '</div>' +
+          '<div class="k-foot"><span>' + d.foot + '</span><button type="button" class="k-add grey" data-add="' + d.id + '"><i class="fa-solid fa-plus"></i> Add</button></div></div></article>';
+      }
+      var label = d.look === "plate" ? '<span class="k-label-pic">' + d.badge + '</span>' : '<span class="k-badge2">' + d.badge + '</span>';
+      return '<article class="k-card small"' + tagsAttr + '>' + pic + label + '</div><div class="k-body"><h4>' + d.name + ' <b class="gold">' + money(d.price) + '</b></h4><p>' + d.desc + '</p>' +
+        '<div class="k-foot"><span>' + d.foot + '</span><button type="button" class="k-cart" data-add="' + d.id + '" aria-label="Add ' + d.name + '"><i class="fa-solid fa-cart-plus"></i></button></div></div></article>';
+    }
+
+    dishes.forEach(function (d) {
+      var grid = document.getElementById("grid-" + (d.sec === "zero" || d.sec === "cocktails" ? "drinks" : d.sec));
+      grid.insertAdjacentHTML("beforeend", cardHtml(d));
+    });
+
+    // ---------- Tabs and filters ----------
+    var tab = "all", picked = [];
+
+    function applyFilters() {
+      var shown = 0;
+      document.querySelectorAll(".k-card").forEach(function (c) {
+        var okTab = tab === "all" || c.dataset.sec === tab;
+        var tags = c.dataset.tags.split(" ");
+        var okTags = picked.every(function (t) { return tags.indexOf(t) > -1; });
+        c.classList.toggle("hidden", !(okTab && okTags));
+        if (okTab && okTags) shown++;
+      });
+      // hide a whole section when none of its dishes are showing
+      document.querySelectorAll(".k-sec").forEach(function (s) {
+        s.classList.toggle("hidden", !s.querySelector(".k-card:not(.hidden)"));
+      });
+      document.getElementById("none").classList.toggle("hidden", shown > 0);
+    }
+
+    document.getElementById("tabs").addEventListener("click", function (e) {
+      var b = e.target.closest(".k-tab"); if (!b) return;
+      this.querySelectorAll(".k-tab").forEach(function (t) { t.classList.remove("active"); });
+      b.classList.add("active"); tab = b.dataset.cat; applyFilters();
+    });
+
+    document.getElementById("filters").addEventListener("click", function (e) {
+      var b = e.target.closest(".k-filter"); if (!b) return;
+      b.classList.toggle("active");
+      picked = Array.from(document.querySelectorAll(".k-filter.active")).map(function (f) { return f.dataset.tag; });
+      applyFilters();
+    });
+
+    // delivery window: pick one
+    document.getElementById("window").addEventListener("click", function (e) {
+      var b = e.target.closest(".k-chip"); if (!b) return;
+      this.querySelectorAll(".k-chip").forEach(function (c) { c.classList.remove("active"); });
+      b.classList.add("active");
+    });
+
+    // ---------- The tray ----------
+    function drawTray() {
+      var list = document.getElementById("tray-list"), sub = 0, pts = 0, count = 0;
+      list.innerHTML = "";
+      Object.keys(tray).forEach(function (id) {
+        var d = byId[id], qty = tray[id];
+        sub += d.price * qty; pts += d.pts * qty; count += qty;
+        var row = document.createElement("div"); row.className = "k-item";
+        row.innerHTML = '<span class="k-ico"><i class="fa-solid ' + (d.sec === "zero" || d.sec === "cocktails" ? "fa-martini-glass" : "fa-utensils") + ' gold"></i></span>' +
+          '<div class="grow"><strong></strong><p></p></div><div class="k-right"><b class="gold"></b><button type="button" class="k-remove">Remove</button></div>';
+        row.querySelector("strong").textContent = d.name;
+        row.querySelector("p").textContent = "Qty: " + qty + " • " + d.note;
+        row.querySelector("b").textContent = money(d.price * qty);
+        row.querySelector(".k-remove").dataset.remove = id;
+        list.appendChild(row);
+      });
+      if (!count) list.innerHTML = '<p class="k-empty-tray">Your tray is empty. Add dishes to send them to your seat.</p>';
+
+      var tax = Math.round(sub * TAX * 100) / 100;
+      document.getElementById("tray-count").textContent = count + (count === 1 ? " item" : " items");
+      document.getElementById("s-sub").textContent = money(sub);
+      document.getElementById("s-tax").textContent = money(tax);
+      document.getElementById("s-total").textContent = money(sub + tax);
+      document.getElementById("pts-text").textContent = "+" + pts + " PTS";
+      document.getElementById("pts-bar").style.width = Math.min(100, pts / POINTS_GOAL * 100) + "%";
+    }
+
+    document.querySelector(".k-menu").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-add]"); if (!b) return;
+      tray[b.dataset.add] = (tray[b.dataset.add] || 0) + 1;
+      document.getElementById("sent").classList.add("hidden");
+      b.classList.add("pop"); setTimeout(function () { b.classList.remove("pop"); }, 350);
+      drawTray();
+    });
+
+    document.getElementById("tray-list").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-remove]"); if (!b) return;
+      delete tray[b.dataset.remove]; drawTray();
+    });
+
+    // ---------- Small switches ----------
+    document.getElementById("quiet").addEventListener("click", function () {
+      var on = this.classList.toggle("on");
+      this.querySelector("b").textContent = on ? "ON" : "OFF";
+    });
+
+    document.getElementById("light").addEventListener("click", function () {
+      var on = this.classList.toggle("on");
+      this.querySelector("b").textContent = on ? "ENABLED" : "DISABLED";
+    });
+
+    document.getElementById("edit-seat").addEventListener("click", function () {
+      var seats = prompt("Which seats should we deliver to? (for example: F12, F13)", document.getElementById("tray-seats").textContent);
+      if (!seats || !seats.trim()) return;
+      seats = seats.trim().slice(0, 30);
+      document.getElementById("tray-seats").textContent = seats;
+      document.getElementById("dest").textContent = "Screen 4 IMAX Laser • " + seats;
+    });
+
+    // ---------- Confirm the order ----------
+    document.getElementById("confirm").addEventListener("click", function () {
+      var ids = Object.keys(tray), sent = document.getElementById("sent");
+      sent.classList.remove("hidden");
+      if (!ids.length) { sent.className = "k-sent err"; sent.textContent = "Add at least one dish to your tray first."; return; }
+
+      localStorage.setItem("cinenovaFoodOrder", JSON.stringify({
+        seats: document.getElementById("tray-seats").textContent,
+        items: ids.map(function (id) { return { name: byId[id].name, qty: tray[id], price: byId[id].price }; }),
+        total: document.getElementById("s-total").textContent,
+        quiet: document.getElementById("quiet").classList.contains("on"),
+        window: document.querySelector(".k-chip.active").textContent.trim(),
+        placedAt: new Date().toISOString()
+      }));
+      sent.className = "k-sent ok";
+      sent.textContent = "Order sent! " + document.getElementById("s-total").textContent + " will be delivered to seats " + document.getElementById("tray-seats").textContent + " within 10-15 minutes.";
+      tray = {}; drawTray();
+    });
+
+    drawTray();
+  </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!doctype html>
+<!-- Tells the browser this is a modern HTML5 page -->
+<html lang="en">
+<head>
+  <!-- Use a character set that supports all languages and symbols (e.g. •, ©) -->
+  <meta charset="UTF-8" />
+  <!-- Makes the page scale properly on phones instead of showing a tiny desktop view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- The text shown on the browser tab -->
+  <title>CineNova - Now Showing</title>
+  <!-- Loads Font Awesome so the <i class="fa-solid ..."> icons work -->
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <!-- Loads the shared stylesheet that gives every page its look -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Loads shared behaviour (data-href links, mobile menu, etc.). "defer" = run after the page is read -->
+  <script src="site.js" defer></script>
+</head>
+
+<body>
+  <!-- Main wrapper; the "home" class applies the dashboard's layout and colours -->
+  <div class="home">
+
+    <!-- ============ TOP BAR (navigation) ============ -->
+    <header class="topbar">
+      <!-- Logo: clicking it reloads the dashboard -->
+      <a href="dashboard.html" class="logo-link"><img src="Images/screen.png" alt="CineNova" class="logo" /></a>
+      <!-- Hamburger button, only visible on phones; site.js opens/closes the menu when clicked -->
+      <button type="button" class="menu-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <!-- Dropdown to choose which cinema branch you're viewing (not connected to any code yet) -->
+      <select name="theater" id="cinema">
+        <option>Downtown IMAX 3D</option>
+        <option>West End Cinema</option>
+        <option>Uptown CineDome</option>
+      </select>
+      <!-- data-href="..." makes this button act like a link: site.js sends you to catalog.html -->
+      <button class="btn-red" data-href="catalog.html">Now Showing</button>
+      <!-- Text links to other pages -->
+      <nav>
+        <a href="catalog.html">Upcoming</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+      </nav>
+      <!-- Search box with a magnifying-glass icon (no code is attached to it yet) -->
+      <div class="field">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search" placeholder="Search movies, directors, cast..." />
+      </div>
+      <!-- Ticket icon with a badge; the "2" is hardcoded text, not a real count -->
+      <button class="icon-btn ticket-btn">
+        <i class="fa-solid fa-ticket gold"></i><span class="count">2</span>
+      </button>
+      <!-- Profile icon: links to the user's profile page -->
+      <a class="avatar" href="profile.html" title="My profile"><i class="fa-solid fa-user"></i></a>
+    </header>
+
+    <!-- The main content of the page -->
+    <main>
+      <!-- ============ HERO (big featured movie banner) ============ -->
+      <section class="hero">
+        <!-- Background image behind the hero text -->
+        <img src="Images/cinematic_wide_shot_banner_for_sci_fi_space_odyssey_movie_cosmic_horizon.png" alt="Space background" class="hero-bg" />
+        <!-- Small info "tags" above the title -->
+        <div class="meta">
+          <span class="tag"><i class="fa-solid fa-circle red dot"></i> Now in IMAX 70mm</span>
+          <span class="tag"><i class="fa-solid fa-star gold"></i> 8.8/10 IMDb</span>
+          <span class="tag">Sci-Fi • Space Adventure • 2h 48m</span>
+        </div>
+        <!-- Movie title; the span makes "ODYSSEY" gold -->
+        <h1>COSMIC HORIZON: <span class="gold">ODYSSEY</span></h1>
+        <!-- Short description of the movie -->
+        <p>
+          Beyond the fathom of known celestial charts, an expedition crew unearths an ancient
+          hyper-spatial anomaly that fractures the boundary between memory and survival.
+          Directed by Evelyn Vance.
+        </p>
+        <!-- Action buttons. id="bookTickets" is used by home.js to open the seat page for this movie -->
+        <div class="hero-buttons">
+          <button class="btn-red" id="bookTickets"><i class="fa-solid fa-ticket"></i>Book Tickets</button>
+          <!-- These two have no click code yet -->
+          <button class="btn"><i class="fa-solid fa-circle-play red"></i> Watch Trailer</button>
+          <button class="btn"><i class="fa-regular fa-bookmark"></i></button>
+        </div>
+      </section>
+
+      <!-- ============ ACTIVE SCREENING (the user's upcoming ticket) ============ -->
+      <!-- Currently hardcoded sample data (Dune: Part Two), not loaded from the database -->
+      <section class="bar">
+        <div class="bar-icon"><i class="fa-solid fa-ticket red"></i></div>
+        <!-- "grow" makes this block take up the spare space in the row -->
+        <div class="grow">
+          <p class="gold">ACTIVE SCREENING #CN-8921</p>
+          <h3>Dune: Part Two</h3>
+          <p>Screen 4 IMAX Laser • Today, 8:15 PM • Seats F12, F13, F14</p>
+        </div>
+        <i class="fa-solid fa-qrcode qr"></i>
+        <div>
+          <p><strong>Fast Gate Entry</strong></p>
+          <p>Scan at Turnstile C</p>
+        </div>
+        <!-- Opens the ticket pop-up (the toggleStub function is at the bottom of this file) -->
+        <button class="btn" onclick="toggleStub(true)">View Ticket Stub</button>
+      </section>
+
+      <!-- ============ CLUB POINTS (loyalty progress) ============ -->
+      <!-- Also hardcoded: 1,420 points is not read from the user's account yet -->
+      <section class="bar">
+        <div class="bar-icon"><i class="fa-solid fa-star gold"></i></div>
+        <div class="grow">
+          <h3>1,420 CineNova Club Points <span class="tag gold">Silver Tier</span></h3>
+          <p>Earn 80 more points to unlock Gold Tier VIP Recliner upgrades & zero online booking fees.</p>
+        </div>
+        <!-- Progress bar: the inner <span> is sized by CSS to show how far along the user is -->
+        <div class="progress-wrap">
+          <p>Silver (1,000) &nbsp; <strong>1,420 / 1,500</strong> &nbsp; Gold</p>
+          <div class="progress"><span></span></div>
+        </div>
+        <!-- #perks jumps to the perks section of the profile page -->
+        <button class="btn" data-href="profile.html#perks">Rewards</button>
+      </section>
+
+      <!-- ============ FILTERS ============ -->
+      <section class="filters">
+        <!-- "pill" buttons; "active" marks the selected one (red). The script at the bottom moves it on click -->
+        <button class="pill active">All Screenings</button>
+        <button class="pill">Now Showing</button>
+        <button class="pill"><i class="fa-solid fa-masks-theater gold"></i> IMAX Experience</button>
+        <button class="pill">Dolby Cinema</button>
+        <button class="pill">Trending</button>
+        <!-- style="..." sets a purple icon colour directly on this element -->
+        <button class="pill"><i class="fa-solid fa-wand-magic-sparkles" style="color:#b197fc"></i> Special Screenings</button>
+        <!-- Calendar date picker (not connected to any filtering yet) -->
+        <label class="date">Date: <input type="date" id="date" name="date" /></label>
+      </section>
+
+      <!-- ============ NOW SHOWING (heading + arrows) ============ -->
+      <section class="section-head">
+        <div>
+          <h2>NOW SHOWING</h2>
+          <p>Current cinematic roster available across digital and premium large-format screens.</p>
+        </div>
+        <!-- Left/right arrows meant for scrolling the list (no code attached yet) -->
+        <div>
+          <button class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="icon-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ============ MOVIE CARDS ============ -->
+      <!-- The 4 cards below are placeholders. When home.js runs, it REPLACES everything inside
+           this ".movies" section with real movies from the Firestore "MovieTickets" collection. -->
+      <section class="movies">
+        <!-- Movie card 1 -->
+        <div class="movie">
+          <!-- "p1" is a colour class used by the CSS behind the poster -->
+          <div class="poster-img p1">
+             <!-- Poster picture. Note: alt text says "Oppenheimer" but the file is "Theory of Light" -->
+             <img src="Images/'Theory of Light',.png" alt="Oppenheimer: The Zenith" class="poster-photo" />
+            <!-- Age rating and star score badges -->
+            <span class="tag">R</span><span class="score"><i class="fa-solid fa-star gold"></i> 8.9</span>
+            <span class="poster-title">THEORY OF LIGHT</span>
+            <!-- Buttons that appear when you hover over the poster; data-href navigates via site.js -->
+            <div class="overlay"><button class="btn-red" data-href="seats.html">Select Seats</button><button class="btn" data-href="details.html">More Details</button></div>
+          </div>
+          <!-- Text under the poster: genre/length, title and showtimes -->
+          <div class="movie-info">
+            <p>Biography • Drama • 3h 00m</p>
+            <h4>Oppenheimer: The Zenith</h4>
+            <div class="times"><span>4:30 PM</span><span>7:45 PM</span><span>10:30 PM</span></div>
+          </div>
+        </div>
+
+        <!-- Movie card 2 (same structure as card 1) -->
+        <div class="movie">
+          <div class="poster-img p2">
+              <img src="Images/NEON SHADOW.png" alt="Neon Shadow: Rebuilt" class="poster-photo" />
+            <span class="tag">PG-13</span><span class="score"><i class="fa-solid fa-star gold"></i> 8.4</span>
+            <span class="poster-title">NEON SHADOW</span>
+            <div class="overlay"><button class="btn-red" data-href="seats.html">Select Seats</button><button class="btn" data-href="details.html">More Details</button></div>
+          </div>
+          <div class="movie-info">
+            <p>Cyberpunk • Action • 2h 15m</p>
+            <h4>Neon Shadow: Rebuilt</h4>
+            <div class="times"><span>5:15 PM</span><span>8:00 PM</span><span>11:15 PM</span></div>
+          </div>
+        </div>
+
+        <!-- Movie card 3 -->
+        <div class="movie">
+          <div class="poster-img p3">
+              <img src="Images/Depths of Thelgard Abyssal Kingdom 3D.png" alt="DEPTHS OF AETHELGARD" class="poster-photo" />
+            <span class="tag">PG</span><span class="score"><i class="fa-solid fa-star gold"></i> 8.1</span>
+            <span class="poster-title">DEPTHS OF AETHELGARD</span>
+            <div class="overlay"><button class="btn-red" data-href="seats.html">Select Seats</button><button class="btn" data-href="details.html">More Details</button></div>
+          </div>
+          <div class="movie-info">
+            <p>Adventure • Sci-Fi • 2h 08m</p>
+            <h4>Abyssal Kingdom 3D</h4>
+            <div class="times"><span>3:00 PM</span><span>6:15 PM</span><span>9:00 PM</span></div>
+          </div>
+        </div>
+
+        <!-- Movie card 4 -->
+        <div class="movie">
+          <div class="poster-img p4">
+              <img src="Images/The Curfew Protocol.png" alt="THE DREAD ECHOES" class="poster-photo" />
+            <span class="tag">NC-17</span><span class="score"><i class="fa-solid fa-star gold"></i> 7.9</span>
+            <span class="poster-title">THE DREAD ECHOES</span>
+            <div class="overlay"><button class="btn-red" data-href="seats.html">Select Seats</button><button class="btn" data-href="details.html">More Details</button></div>
+          </div>
+          <div class="movie-info">
+            <p>Psychological • Mystery • 1h 52m</p>
+            <h4>The Curfew Protocol</h4>
+            <div class="times"><span>9:45 PM</span><span>11:59 PM</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FOOD & DRINKS PREVIEW ============ -->
+      <!-- id="food" lets other links jump straight to this section -->
+      <section class="food" id="food">
+        <div class="food-head">
+          <div>
+            <h3><i class="fa-solid fa-burger gold"></i> GOURMET CONCESSIONS & PAIRINGS</h3>
+            <p>Order in advance — served right to your luxury recliner seat before showtime.</p>
+          </div>
+          <!-- Link to the full menu page -->
+          <a href="bar-kitchen.html">View Full Bar & Kitchen Menu <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="foodcards">
+          <!-- Food card 1. Prices are in Rand (R) here, but the rest of the site uses $ -->
+          <div class="foodcard">
+            <div class="food-img f1"><img src="Images/Gourmet cinema concession photo of Caramel Popcorn Trio artisan.png" alt="Caramel Popcorn Trio" class="food-img f1" /></div>
+            <div class="grow">
+              <h4>Caramel Popcorn Trio</h4>
+              <p>Dark chocolate, salted butter & maple</p>
+              <!-- Price and a "+" add button (no code attached to the button yet) -->
+              <div class="sub"><span class="price-tag">R14.50</span><button class="plus"><i class="fa-solid fa-plus"></i></button></div>
+            </div>
+          </div>
+          <!-- Food card 2 -->
+          <div class="foodcard">
+            <div class="food-img f2"><img src="Images/Smoked Blood Orange Soda (2).png" alt="Smoked Blood Orange Soda" class="food-img f2" /></div>
+            <div class="grow">
+              <h4>Smoked Blood Orange Soda</h4>
+              <p>House-brewed soda with rosemary botanical</p>
+              <div class="sub"><span class="price-tag">R8.00</span><button class="plus"><i class="fa-solid fa-plus"></i></button></div>
+            </div>
+          </div>
+          <!-- Food card 3 -->
+          <div class="foodcard">
+            <div class="food-img f3"><img src="Images/luxury_cinema_gourmet_concession_pairing_artisan_truffle_gouda_nachos_served.png" alt="Truffle & Gouda Nachos" class="food-img f3" /></div>
+            <div class="grow">
+              <h4>Truffle & Gouda Nachos</h4>
+              <p>Smoked jalapeño dip & herb crema</p>
+              <div class="sub"><span class="price-tag">R16.00</span><button class="plus"><i class="fa-solid fa-plus"></i></button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+      <!-- Column 1: brand, blurb and social icon buttons -->
+      <div>
+        <h4>CINE<span class="red">NOVA</span></h4>
+        <p>The premier midnight cinema and luxury screening experience. IMAX, Dolby Atmos, and curated cinematic feasts.</p>
+        <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i></button>
+        <button class="icon-btn"><i class="fa-solid fa-rss"></i></button>
+      </div>
+      <!-- Column 2: links to explore the site (href="#" means "goes nowhere yet") -->
+      <div>
+        <h4>Explore</h4>
+        <a href="catalog.html">Now Showing</a>
+        <a href="catalog.html">Upcoming Premieres</a>
+        <a href="catalog.html">Cinema Theaters</a>
+        <a href="#">Film Festivals & Retrospectives</a>
+      </div>
+      <!-- Column 3: experiences offered -->
+      <div>
+        <h4>Experiences</h4>
+        <a href="#">IMAX 3D Laser</a>
+        <a href="#">Dolby Atmos Audio</a>
+        <a href="#">VIP Recliner Suites</a>
+        <a href="bar-kitchen.html">Food & Drinks</a>
+        <a href="bar-kitchen.html">Bar & Kitchen</a>
+      </div>
+      <!-- Column 4: cinema locations (h5 = location name, p = its features) -->
+      <div>
+        <h4>Locations</h4>
+        <h5>Downtown Flagship</h5><p>IMAX • Dolby • VIP Lounge</p>
+        <h5>West End Cinema</h5><p>4DX • Midnight Screenings</p>
+        <h5>Uptown CineDome</h5><p>70mm Projection • Terrace Bar</p>
+      </div>
+      <!-- Column 5: newsletter sign-up (the Join button has no code attached yet) -->
+      <div>
+        <h4>Midnight Club</h4>
+        <p>Unlock early access tickets, reserved premiere seats, and exclusive director Q&As.</p>
+        <div class="join-row">
+          <input type="email" id="user-email" name="user-email" placeholder="Your email" />
+          <button class="btn-red">Join</button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Legal line at the very bottom of the page -->
+    <div class="copyright">
+      <p>© 2025 CineNova Midnight Cinemas, Inc. All cinematic rights reserved.</p>
+      <p>Privacy Notice &nbsp; Terms of Ticketing &nbsp; Refund Policy &nbsp; Accessibility</p>
+    </div>
+
+    <!-- ============ TICKET STUB POP-UP (hidden until opened) ============ -->
+    <!-- id="stub" is how the script finds it. Clicking the dark background (not the card) closes it:
+         "event.target === this" is only true when the click landed on this outer element itself. -->
+    <div class="modal" id="stub" onclick="if (event.target === this) toggleStub(false)">
+      <div class="stub-card">
+        <div class="stub-head">
+          <h4>CINE<span class="red">NOVA</span> <span class="vip-badge">IMAX VIP Pass</span></h4>
+          <!-- Round X button closes the pop-up -->
+          <button class="icon-btn round" onclick="toggleStub(false)"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Ticket details (hardcoded sample data) -->
+        <p class="gold stub-label">SCREENING TODAY</p>
+        <h3>Dune: Part Two</h3>
+        <p>Auditorium 4 • IMAX Laser with 12-Channel Dolby Atmos</p>
+
+        <div class="stub-stats">
+          <div><p>TIME</p><strong>8:15 PM</strong></div>
+          <div><p>ROW</p><strong class="gold">Row F</strong></div>
+          <div><p>SEATS</p><strong>12, 13, 14</strong></div>
+        </div>
+
+        <!-- QR placeholder icon and ticket code -->
+        <div class="qr-box">
+          <i class="fa-solid fa-qrcode"></i>
+          <strong>#CN-8921-9943</strong>
+          <p>Present this ticket code directly at Door 4 scanner</p>
+        </div>
+
+        <!-- Wallet and share buttons (no code attached yet) -->
+        <div class="stub-actions">
+          <button class="btn"><i class="fa-solid fa-download"></i> Save to Wallet</button>
+          <button class="btn-red"><i class="fa-solid fa-share-nodes"></i> Share Pass</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE SCRIPT ============ -->
+  <script>
+    // Opens or closes the ticket pop-up.
+    // toggleStub(true) adds the "open" class (CSS then shows it); toggleStub(false) removes it.
+    function toggleStub(show) {
+      document.getElementById("stub").classList.toggle("open", show);
+    }
+
+    // Filter pills: when one is clicked it becomes the active (red) pill.
+    // This only changes the colour; it does not filter the movies yet.
+    document.querySelectorAll(".pill").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelector(".pill.active").classList.remove("active"); // un-highlight the old one
+        pill.classList.add("active");                                      // highlight the clicked one
+      });
+    });
+
+    // Pressing the Esc key also closes the pop-up
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") toggleStub(false);
+    });
+  </script>
+ <!-- Loads home.js as a module (so it can use import). It fetches the real movies from Firestore
+      and replaces the placeholder cards above. -->
+ <script src="Javascript/home.js" type="module"></script>
+</body>
+</html>

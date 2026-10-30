@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Confirmed - CineNova</title>
+  <script src="https://kit.fontawesome.com/bc6efb8647.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="Javascript/site.js" defer></script>
+</head>
+
+<body>
+  <div class="page done-page">
+    <header>
+      <a href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+      <span class="secure">Encrypted Luxury Portal</span>
+    </header>
+
+    <main class="done-wrap">
+      <div class="done-check"><i class="fa-solid fa-check"></i></div>
+      <span class="tag gold">Step 3 of 3 • Complete</span>
+      <h1>Booking Confirmed</h1>
+      <p class="done-lead">Thank you, <strong id="done-name">patron</strong>. Here is your ticket.</p>
+
+      <!-- Email status: updates by itself once the server answers -->
+      <div class="mail-status wait" id="mail-status"><i class="fa-regular fa-envelope"></i> <span id="mail-text">Preparing your email...</span></div>
+
+      <div class="done-ticket">
+        <div class="done-main">
+          <p class="done-kicker" id="done-format">Now Showing</p>
+          <h2 id="done-movie">Cosmic Horizon: Odyssey</h2>
+          <div class="done-tags" id="done-tags"></div>
+
+          <div class="done-info">
+            <div><p>Cinema</p><strong id="i-cinema"></strong></div>
+            <div><p>Hall</p><strong id="i-hall"></strong></div>
+            <div><p>Date &amp; Time</p><strong id="i-when"></strong></div>
+            <div><p>Entry</p><strong id="i-gate"></strong></div>
+            <div><p>Booked by</p><strong id="i-name"></strong></div>
+            <div><p>Payment</p><strong id="i-method"></strong></div>
+            <div><p>Paid on</p><strong id="i-paid"></strong></div>
+            <div><p>Ticket email</p><strong id="i-email"></strong></div>
+          </div>
+
+          <p class="done-kicker">Your Seats</p>
+          <table class="done-table">
+            <thead><tr><th>Seat</th><th>Position</th><th>Section</th><th>Price</th></tr></thead>
+            <tbody id="done-seats"></tbody>
+          </table>
+
+          <p class="done-kicker">Payment Summary</p>
+          <div class="pay-lines" id="done-lines"></div>
+          <p class="done-total"><span>Total Paid</span><strong id="done-total">$0.00</strong></p>
+
+          <p class="done-rules"><i class="fa-regular fa-clock gold"></i> Arrive 20 minutes early &nbsp; <i class="fa-solid fa-shield-halved gold"></i> 100% refundable up to 2h before showtime</p>
+        </div>
+
+        <div class="done-qr">
+          <img id="done-qr-img" alt="Ticket QR code" width="170" height="170" />
+          <i class="fa-solid fa-qrcode hidden" id="done-qr-icon"></i>
+          <strong id="done-code">#CN-0000-0000</strong>
+          <p>Scan at the Fast Gate turnstile</p>
+        </div>
+      </div>
+
+      <form class="mail-form" id="mail-form">
+        <input type="text" id="mail-to" placeholder="Send my ticket to: vip.patron@gmail.com" />
+        <button type="submit" class="done-btn"><i class="fa-regular fa-envelope"></i> Email my ticket</button>
+      </form>
+
+      <div class="done-actions">
+        <a href="dashboard.html" class="done-btn">Go to My Dashboard</a>
+        <a href="catalog.html" class="done-btn ghost">Book Another Film</a>
+        <button type="button" class="done-btn ghost" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Ticket</button>
+      </div>
+    </main>
+
+    <footer>
+      <span><i class="fa-solid fa-lock gold"></i> 256-Bit SSL Cinematic Box Office Security Matrix</span>
+      <span>Auditorium Safety &nbsp; Privacy Policy &nbsp; System Status</span>
+    </footer>
+  </div>
+
+  <script>
+  // Wait for site.js (it loads deferred) so CINENOVA_API exists
+  document.addEventListener("DOMContentLoaded", function () {
+    // ---------- Load the order saved by the payment page (or a sample if you opened this page directly) ----------
+    var order = JSON.parse(localStorage.getItem("cinenovaOrder") || "null") || {
+      id: "CN-8921-9943", name: "Julian Montgomery", method: "Card ending 4242", email: "", paidAt: new Date().toISOString(),
+      booking: {
+        movie: "Cosmic Horizon: Odyssey", rating: "PG-13", duration: "2h 46m", format: "IMAX 3D Laser • Dolby Atmos",
+        cinema: "CineNova Downtown Flagship", gate: "Fast Gate Entry • Turnstile C", hall: "Hall 1 • IMAX 3D Laser", when: "Fri, Oct 25 • 6:45 PM",
+        seats: [{ id: "F8", price: "21.5", zone: "Prime Center Hall" }, { id: "F9", price: "21.5", zone: "Prime Center Hall" }],
+        lines: [["Standard Tickets (2x $21.50)", "$43.00"], ["IMAX & Laser Technology Surcharge", "$3.00"], ["Online Convenience Fee & Tax", "$3.68"]],
+        total: "$49.68"
+      }
+    };
+    var b = order.booking;
+
+    function set(id, text) { document.getElementById(id).textContent = text; }
+    function cell(row, text) { var td = document.createElement("td"); td.textContent = text; row.appendChild(td); }
+
+    // "F8" -> Row F, Seat 8      "I-3" -> Row I, Seat 3
+    function seatLabel(id) { var m = /^([A-J])-?(\d+)$/.exec(id); return m ? "Row " + m[1] + ", Seat " + m[2] : id; }
+
+    // ---------- Fill in the ticket ----------
+    set("done-name", order.name || "patron");
+    set("done-format", "Now Showing • " + b.format);
+    set("done-movie", b.movie);
+    set("i-cinema", b.cinema); set("i-hall", b.hall); set("i-when", b.when); set("i-gate", b.gate);
+    set("i-name", order.name || "CineNova Patron"); set("i-method", order.method);
+    set("i-paid", new Date(order.paidAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }));
+    set("i-email", order.email || "Not provided");
+    set("done-total", b.total); set("done-code", "#" + order.id);
+
+    [b.rating, b.duration].forEach(function (t) {
+      var tag = document.createElement("span"); tag.className = "tag"; tag.textContent = t;
+      document.getElementById("done-tags").appendChild(tag);
+    });
+
+    b.seats.forEach(function (s) {
+      var row = document.createElement("tr");
+      var chip = document.createElement("td"); var span = document.createElement("span");
+      span.className = "pay-chip"; span.textContent = s.id.replace("-", ""); chip.appendChild(span); row.appendChild(chip);
+      cell(row, seatLabel(s.id)); cell(row, s.zone || ""); cell(row, s.price ? "$" + parseFloat(s.price).toFixed(2) : "");
+      document.getElementById("done-seats").appendChild(row);
+    });
+
+    b.lines.forEach(function (l) {
+      var p = document.createElement("p"); p.innerHTML = "<span></span><span></span>";
+      p.children[0].textContent = l[0]; p.children[1].textContent = l[1];
+      document.getElementById("done-lines").appendChild(p);
+    });
+
+    // QR picture comes from the server; if the server isn't running we show an icon instead
+    var qr = document.getElementById("done-qr-img");
+    qr.onerror = function () { qr.classList.add("hidden"); document.getElementById("done-qr-icon").classList.remove("hidden"); };
+    qr.src = CINENOVA_API + "/api/qr/" + order.id + ".png";
+
+    // ---------- Sending the email ----------
+    var box = document.getElementById("mail-status"), text = document.getElementById("mail-text");
+    function status(kind, message) { box.className = "mail-status " + kind; text.textContent = message; }
+
+    function sendEmail(to) {
+      order.email = to;
+      localStorage.setItem("cinenovaOrder", JSON.stringify(order));
+      set("i-email", to);
+      status("wait", "Sending your ticket to " + to + "...");
+
+      fetch(CINENOVA_API + "/api/send-ticket", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ order: order }) })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.ok) {
+            order.emailedTo = to; localStorage.setItem("cinenovaOrder", JSON.stringify(order));
+            status("ok", data.dryRun ? "Demo mode: the email was saved to last-email.html instead of being sent." : "Ticket emailed to " + to + ". Check your inbox (and spam folder).");
+          } else { status("err", "We couldn't email your ticket: " + data.message + " You can still show this page at the gate."); }
+        })
+        .catch(function () { status("err", "The email server isn't running, so no email was sent. Start it with: npm start. You can still show this page at the gate."); });
+    }
+
+    document.getElementById("mail-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var to = document.getElementById("mail-to").value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) { status("err", "Please enter a valid email address."); return; }
+      sendEmail(to);
+    });
+
+    // Send automatically once, right after paying (not again if you refresh)
+    if (order.email && order.emailedTo !== order.email) sendEmail(order.email);
+    else if (order.email) status("ok", "Ticket was emailed to " + order.email + ".");
+    else status("wait", "Enter your email below and we'll send you this ticket.");
+  });
+  </script>
+</body>
+</html>
